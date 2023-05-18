@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
 app.use(routes);
 
 db.once('open', () => {
+    console.log("connected to db");
     app.listen(PORT, () => {console.log("Listening at " + PORT)});
 });
 
