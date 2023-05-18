@@ -2,6 +2,7 @@ import express, { urlencoded, json } from "express";
 import { join } from "path";
 import * as url from "url";
 import routes from "./routes/index.js";
+import db from "./config/connection.js";
 import cors from "cors";
 
 const app = express();
@@ -19,5 +20,8 @@ app.get("/", (req, res) => {
 
 app.use(routes);
 
-app.listen(PORT, () => {console.log("Listening at " + PORT)});
+db.once('open', () => {
+    app.listen(PORT, () => {console.log("Listening at " + PORT)});
+});
+
 
