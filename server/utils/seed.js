@@ -1,33 +1,45 @@
 import pkg from 'mongoose';
-const { connection } = pkg;
-import User from '../models/index.js';
+const { connect, connection } = pkg;
+import models from '../models/index.js';
 
-  connection.on('error', (err) => {
-    console.error('MongoDB connection error:', err);
-  });
+connect('mongodb://localhost/exceed-game', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(
+  () => { 
+    console.log("connection file ready");
+    seedData();
+  },
+  err => { console.err("error") }
+);
 
-  connection.once('open', async () => {
-    await User.deleteMany({});
+connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
 
-    // sample seed data for users
+const seedData  = async () => {
+  console.log("database is open");
+  await models.User.deleteMany({});
 
-    const users = [
-      {
-          username: "Test One",
-          email: "test1@test.com"
-      },
-      {
-          username: "Test Two",
-          email: "test2@test.com"
-      },
-      {
-          username: "Test Three",
-          email: "test3@test.com"
-      },
-    ];
+  // sample seed data for users
 
-    await User.collection.insertMany(users);
+  const users = [
+    {
+        username: "Test One",
+        email: "test1@test.com"
+    },
+    {
+        username: "Test Two",
+        email: "test2@test.com"
+    },
+    {
+        username: "Test Three",
+        email: "test3@test.com"
+    },
+  ];
 
-    console.table(users);
-    process.exit(0);
-  });
+  await models.User.collection.insertMany(users);
+
+  console.table(users);
+  process.exit(0);
+};
