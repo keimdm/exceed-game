@@ -1,11 +1,17 @@
 import { Router } from "express";
 import models from '../models/index.js';
+import { signToken, auth } from "../utils/auth.js";
 
 const router = Router();
 
 // /api/test/
 router.get('/test', (req, res) => {
     res.json({ message: "hello from server" });
+});
+
+// /api/testAuth/
+router.get('/testAuth', auth, (req, res) => {
+  res.json({ message: "hello from server with Auth" });
 });
 
 // /api/users/
@@ -28,9 +34,35 @@ router.get('/users/:id', (req, res) => {
 
 // /api/users/
 router.post('/users/', (req, res) => {
-    models.User.create(req.body)
-      .then((dbUserData) => res.json(dbUserData))
-      .catch((err) => res.status(500).json(err));
+  models.User.create(req.body)
+    .then((dbUserData) => res.json(dbUserData))
+    .catch((err) => res.status(500).json(err));
+})
+
+// /api/users/login/
+router.post('/users/login/', async (req, res) => {
+    try {
+      let { email, password } = req.body;
+      email = email.toLowerCase();
+
+      const user = await models.User.findOne({ email });
+
+      if (!user) {
+        return res.status(400).send("Email not found");
+      }
+
+      const verified = await user.isCorrectPassword(password);
+      if (!verified) {
+        return res.status(400).send("Invalid password");
+      }
+
+      const token = signToken(user);
+
+      res.json({ message: `User with name ${user.username} logged in`, token });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
 })
 
 // /api/users/:id

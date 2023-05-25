@@ -26,15 +26,18 @@ const seedData  = async () => {
   const users = [
     {
         username: "Test One",
-        email: "test1@test.com"
+        email: "test1@test.com",
+        password: "password"
     },
     {
         username: "Test Two",
-        email: "test2@test.com"
+        email: "test2@test.com",
+        password: "password"
     },
     {
         username: "Test Three",
-        email: "test3@test.com"
+        email: "test3@test.com",
+        password: "password"
     },
   ];
 

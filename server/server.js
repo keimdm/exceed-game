@@ -6,14 +6,11 @@ import db from "./config/connection.js";
 import cors from "cors";
 import env from "dotenv";
 
-env.config()
+env.config();
 
 const app = express();
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const PORT = process.env.SERVER_PORT;
-console.log(env);
-console.log(process.env);
-console.log(PORT);
 
 app.use(cors());
 app.use(json());
