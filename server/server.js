@@ -4,10 +4,16 @@ import * as url from "url";
 import routes from "./routes/index.js";
 import db from "./config/connection.js";
 import cors from "cors";
+import env from "dotenv";
+
+env.config()
 
 const app = express();
-const PORT = 3001;
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const PORT = process.env.SERVER_PORT;
+console.log(env);
+console.log(process.env);
+console.log(PORT);
 
 app.use(cors());
 app.use(json());

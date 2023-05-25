@@ -26,18 +26,21 @@ router.get('/users/:id', (req, res) => {
       .catch((err) => res.status(500).json(err));
 })
 
+// /api/users/
 router.post('/users/', (req, res) => {
     models.User.create(req.body)
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => res.status(500).json(err));
 })
 
+// /api/users/:id
 router.put('/users/:id', (req, res) => {
     models.User.findOneAndUpdate({ _id: req.params.id }, { username: req.body.username, email: req.body.email }, { new: true} )
     .then((dbUserData) => res.json(dbUserData))
     .catch((err) => res.status(500).json(err));
 })
 
+// /api/users/:id
 router.delete('/users/:id',  (req, res) => {
     models.User.findOneAndDelete({_id: req.params.id})
     .then((dbUserData) => res.json(dbUserData))
