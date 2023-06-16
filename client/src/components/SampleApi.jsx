@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function App() {
+function SampleApi() {
 
   const [message, setMessage] = useState("");
 
@@ -27,4 +27,4 @@ function App() {
   )
 }
 
-export default App
+export default SampleApi;
