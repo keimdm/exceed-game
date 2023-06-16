@@ -50,8 +50,11 @@ router.post('/users/login/', async (req, res) => {
       if (!user) {
         return res.status(400).send("Email not found");
       }
-
+      console.log(user);
       const verified = await user.isCorrectPassword(password);
+      console.log(email);
+      console.log(password);
+      console.log(verified);
       if (!verified) {
         return res.status(400).send("Invalid password");
       }
