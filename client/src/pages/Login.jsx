@@ -23,9 +23,18 @@ function Login() {
                 "password": passwordInput
             }),
         });
-        const data = await response.json();
-        console.log(data);
-        login(data.token);
+        if (response.status === 400) {
+            console.log("Try again!");
+        }
+        else if (response.status === 500) {
+            console.log("Server error - please try again later!");
+        }
+        else  {
+            const data = await response.json();
+            if (data) {
+                login(data.token);
+            }
+        }  
     }
 
     const updateEmail = async (event) => {
