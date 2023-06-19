@@ -1,24 +1,8 @@
 import { loggedIn, login, logout } from '../utils/auth';
 import { Button } from '@chakra-ui/react';
+import { Link } from "react-router-dom";
 
 function Home() {
-
-    const signIn = async () => {
-        // use test4@test.com, password as test login
-        console.log("sign in attempt");
-        const response = await fetch("/api/users/login/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                "email": "test4@test.com",
-                "password": "password"
-            }),
-        });
-        const data = await response.json();
-        login(data.token);
-    }
 
     const signOut = async () => {
         logout();
@@ -26,6 +10,7 @@ function Home() {
 
     return (
       <>
+        <p>Home</p>
         {loggedIn() ? (
             <Button
                 onClick={signOut}
@@ -33,11 +18,11 @@ function Home() {
                 Log Out
             </Button>
         ) : (
-            <Button
-                onClick={signIn}
-            >
-                Log In
-            </Button>
+            <Link to={`/login`}>
+                <Button>
+                    Click here to log in
+                </Button>
+            </Link>
         )
         }
       </>
