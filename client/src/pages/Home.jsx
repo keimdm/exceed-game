@@ -12,17 +12,41 @@ function Home() {
       <>
         <p>Home</p>
         {loggedIn() ? (
-            <Button
-                onClick={signOut}
-            >
-                Log Out
-            </Button>
-        ) : (
-            <Link to={`/login`}>
-                <Button>
-                    Click here to log in
+            <>
+                <Link to={`/levels`}>
+                    <Button>
+                        Select a Level
+                    </Button>
+                </Link>
+                <Link to={`/scores`}>
+                    <Button>
+                        View High Scores
+                    </Button>
+                </Link>
+                <Link to={`/account`}>
+                    <Button>
+                        View Account Details
+                    </Button>
+                </Link>
+                <Button
+                    onClick={signOut}
+                >
+                    Log Out
                 </Button>
-            </Link>
+            </>
+        ) : (
+            <>
+                <Link to={`/login`}>
+                    <Button>
+                    Log In
+                    </Button>
+                </Link>
+                <Link to={`/signup`}>
+                    <Button>
+                        Sign Up
+                    </Button>
+                </Link>
+            </>
         )
         }
       </>

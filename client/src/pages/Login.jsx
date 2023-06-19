@@ -72,7 +72,7 @@ function Login() {
                 </Button>
                 <Link to={`/`}>
                     <Button>
-                        Return to Home Page
+                        Home Page
                     </Button>
                 </Link>
             </>

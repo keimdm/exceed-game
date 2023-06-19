@@ -5,6 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //import SampleApi from './components/SampleApi.jsx'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
+import Levels from './pages/Levels.jsx'
+import Scores from './pages/Scores.jsx'
+import Account from './pages/Account.jsx'
+import SignUp from './pages/SignUp.jsx'
 
 // Creates the router for the app
 const router = createBrowserRouter([
@@ -15,6 +19,22 @@ const router = createBrowserRouter([
 	{
 		path: "/login",
 		element: <Login />,
+	},
+	{
+		path: "/levels",
+		element: <Levels />,
+	},
+	{
+		path: "/scores",
+		element: <Scores />,
+	},
+	{
+		path: "/account",
+		element: <Account />,
+	},
+	{
+		path: "/signup",
+		element: <SignUp />,
 	},
 ]);
 
