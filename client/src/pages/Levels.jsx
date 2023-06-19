@@ -9,6 +9,11 @@ function Levels() {
             {loggedIn() ? (
                 <>
                     <p>Levels</p>
+                    <Link to={`/level-one`}>
+                        <Button>
+                            Level 1
+                        </Button>
+                    </Link>
                     <Link to={`/`}>
                         <Button>
                             Home Page

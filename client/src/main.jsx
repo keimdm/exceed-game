@@ -9,6 +9,7 @@ import Levels from './pages/Levels.jsx'
 import Scores from './pages/Scores.jsx'
 import Account from './pages/Account.jsx'
 import SignUp from './pages/SignUp.jsx'
+import LevelOne from './pages/LevelOne.jsx'
 
 // Creates the router for the app
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
 	{
 		path: "/signup",
 		element: <SignUp />,
+	},
+	{
+		path: "/level-one",
+		element: <LevelOne />,
 	},
 ]);
 
