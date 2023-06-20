@@ -8,7 +8,7 @@ function Cell({colStart, colEnd, rowStart, rowEnd, contents, index, status}) {
             colEnd={colEnd}
             rowStart={rowStart}
             rowEnd={rowEnd}
-            bgColor="white"
+            bgColor={status === "Selected" ? "blue.300" : "white"}
             color="black"
             borderColor="gray.400"
             borderWidth="1px"
@@ -16,7 +16,7 @@ function Cell({colStart, colEnd, rowStart, rowEnd, contents, index, status}) {
             alignItems="center"
             pl={2}
         >
-            <Text>{index} {status}</Text>
+            <Text>{contents}</Text>
         </GridItem>
     )
 }
