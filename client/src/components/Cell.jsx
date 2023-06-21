@@ -16,7 +16,7 @@ function Cell({colStart, colEnd, rowStart, rowEnd, contents, index, status}) {
             alignItems="center"
             pl={2}
         >
-            <Text>{contents}</Text>
+            <Text>{index}{contents}</Text>
         </GridItem>
     )
 }
