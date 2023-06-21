@@ -1,7 +1,7 @@
 import { Button, Grid } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import Cell from '../components/Cell.jsx'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function LevelOne() {
 
@@ -14,6 +14,10 @@ function LevelOne() {
     const [commandPressed, setCommandPressed] = useState(0);
     const [selectMultipleX, setSelectMultipleX] = useState(0);
     const [selectMultipleY, setSelectMultipleY] = useState(0);
+    const [counter, setCounter] = useState(0);
+    const [startTime, setStartTime] = useState(0);
+    const timeElapsed = useRef(0);
+    const maxTime = 30;
     const min = 0;
     const max = 149;
     const noCols = 10;
@@ -663,11 +667,29 @@ function LevelOne() {
         newCells[current].status = "Selected";
 
         setCells(newCells);
+
+        setStartTime(Date.now());
     }, []);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCounter(counter + 1);
+        }, 100);
+       
+        return () => clearInterval(interval);
+    });
+
+    useEffect(() => {
+        const currentTime = Date.now();
+        const secondsElapsed = (currentTime - startTime) / 1000;
+        timeElapsed.current = Math.round(secondsElapsed);
+        console.log(timeElapsed.current);
+    });
 
     return (
         <>
             <p>Level One</p>
+            <p>{maxTime - timeElapsed.current}</p>
             <div
                 tabIndex={-1}
                 onKeyDown={handleKeyDown}  
