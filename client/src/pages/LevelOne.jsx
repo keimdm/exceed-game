@@ -104,6 +104,8 @@ function LevelOne() {
                                 }
                                 for (let m = 0; (selectMultipleX >= 0? m < selectMultipleX: m > selectMultipleX); (selectMultipleX >= 0 ? m++ : m--)) {
                                     cells[current + (newValueY >= 0 ? k + 1 : k - 1) + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
+                                    cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
+                                    cells[current + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
                                 }
                             }
                         }
@@ -143,6 +145,8 @@ function LevelOne() {
                                     }
                                     for (let m = 0; (selectMultipleX >= 0? m < selectMultipleX: m > selectMultipleX); (selectMultipleX >= 0 ? m++ : m--)) {
                                         cells[current + (newValueY >= 0 ? k + 1 : k - 1) + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
+                                        cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
+                                        cells[current + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
                                     }
                                 }
                             }
@@ -246,6 +250,8 @@ function LevelOne() {
                                 }
                                 for (let m = 0; (selectMultipleX >= 0? m < selectMultipleX: m > selectMultipleX); (selectMultipleX >= 0 ? m++ : m--)) {
                                     cells[current + (newValueY >= 0 ? k + 1 : k - 1) + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
+                                    cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
+                                    cells[current + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
                                 }
                             }
                         }
@@ -285,6 +291,8 @@ function LevelOne() {
                                     }
                                     for (let m = 0; (selectMultipleX >= 0? m < selectMultipleX: m > selectMultipleX); (selectMultipleX >= 0 ? m++ : m--)) {
                                         cells[current + (newValueY >= 0 ? k + 1 : k - 1) + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
+                                        cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
+                                        cells[current + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
                                     }
                                 }
                             }
@@ -340,7 +348,7 @@ function LevelOne() {
                             // accounts for case with top left/bottom right cell
                             try {
                                 // if current cell is blank and the next proposed one isn't
-                                if (cells[proposedNewCell + noRows].contents !== "" && cells[proposedNewCell].contents === "") {
+                                if (cells[proposedNewCell + noRows].contents !== "") {
                                     canContinue = false;
                                     // move on to the next cell (per excel's behavior)
                                     if (proposedNewCell + noRows <= max && cells[proposedNewCell].contents === "") {
@@ -388,6 +396,8 @@ function LevelOne() {
                                 }
                                 for (let m = 0; (selectMultipleY >= 0? m < selectMultipleY: m > selectMultipleY); (selectMultipleY >= 0 ? m++ : m--)) {
                                     cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
+                                    cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
+                                    cells[current + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
                                 }
                             }
                         }
@@ -427,6 +437,8 @@ function LevelOne() {
                                     }
                                     for (let m = 0; (selectMultipleY >= 0? m < selectMultipleY: m > selectMultipleY); (selectMultipleY >= 0 ? m++ : m--)) {
                                         cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
+                                        cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
+                                        cells[current + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
                                     }
                                 }
                             }
@@ -482,7 +494,7 @@ function LevelOne() {
                             // accounts for case with top left/bottom right cell
                             try {
                                 // if current cell is blank and the next proposed one isn't
-                                if (cells[proposedNewCell - noRows].contents !== "" && cells[proposedNewCell].contents === "") {
+                                if (cells[proposedNewCell - noRows].contents !== "") {
                                     canContinue = false;
                                     // move on to the next cell (per excel's behavior)
                                     if (proposedNewCell - noRows >= min && cells[proposedNewCell].contents === "") {
@@ -530,6 +542,8 @@ function LevelOne() {
                                 }
                                 for (let m = 0; (selectMultipleY >= 0? m < selectMultipleY: m > selectMultipleY); (selectMultipleY >= 0 ? m++ : m--)) {
                                     cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
+                                    cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
+                                    cells[current + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
                                 }
                             }
                         }
@@ -569,6 +583,8 @@ function LevelOne() {
                                     }
                                     for (let m = 0; (selectMultipleY >= 0? m < selectMultipleY: m > selectMultipleY); (selectMultipleY >= 0 ? m++ : m--)) {
                                         cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
+                                        cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
+                                        cells[current + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
                                     }
                                 }
                             }
