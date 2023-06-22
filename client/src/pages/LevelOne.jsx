@@ -18,12 +18,17 @@ function LevelOne() {
     const [startTime, setStartTime] = useState(0);
     const [gameRunning, setGameRunning] = useState(0);
     const [gameOver, setGameOver] = useState(0);
+    const [timesToSpawn, setTimesToSpawn] = useState([]);
+    const [tempPotential, setTempPotential] = useState([]);
     const timeElapsed = useRef(0);
-    const maxTime = 30;
+    const incrementForSpawn = 2;
+    const maxTime = 60;
     const min = 0;
     const max = 149;
     const noCols = 10;
     const noRows = 15;
+    const permanentPotential = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149];
+
 
     const editStatus = (current, target, newStatus) => {
         const prevCells = cells.slice(0);
@@ -36,6 +41,7 @@ function LevelOne() {
 
     const handleKeyDown = (event) => {
         event.preventDefault();
+        console.log(event);
         if (gameRunning === 0) {
             setStartTime(Date.now());
             setGameRunning(1);
@@ -633,6 +639,31 @@ function LevelOne() {
                 case "MetaRight":
                     setCommandPressed(1);
                 break;
+                case "Backspace":
+                    let newCells = cells.slice(0);
+                    let newTempPotential = [];
+                    for (let q = 0; q < newCells.length; q++) {
+                        if (newCells[q].status === "Selected") {
+                            newCells[q].contents = "";
+                        }
+                        if (newCells[q].contents === "#ERR") {
+                            if (q + 1 <= max && (q + 1) % noRows !== 0 && !newTempPotential.includes(q + 1)) {
+                                newTempPotential.push(q + 1);
+                            }
+                            if (q - 1 >= min && (q) % noRows !== 0 && !newTempPotential.includes(q - 1)) {
+                                newTempPotential.push(q - 1);
+                            }
+                            if (q + 15 <= max && !newTempPotential.includes(q + 15)) {
+                                newTempPotential.push(q + 15);
+                            }
+                            if (q - 15 >= min && !newTempPotential.includes(q - 15)) {
+                                newTempPotential.push(q - 15);
+                            }
+                        }
+                    }
+                    setCells(newCells);
+                    setTempPotential(newTempPotential);
+                break;
             }
         }
     }
@@ -663,16 +694,15 @@ function LevelOne() {
         setSelectMultipleY(0);
         setCounter(0);
         setStartTime(0);
-    }
-
-    useEffect(() => {
+        setTimesToSpawn([]);
+        setTempPotential([])
         const newCells = [];
 
         for (let i = 0; i < noCols; i++) {
             for (let j = 0; j < noRows; j++) {
                 let contents = "";
-                if (i >= 2 && i <=6 && j >= 3 && j <=7 ) {
-                    contents = "D";
+                if (i >= 3 && i <=6 && j >= 3 && j <=7 ) {
+                    contents = "DATA";
                 }
                 else {
                     contents = "";
@@ -687,6 +717,50 @@ function LevelOne() {
                 });
             }
         }
+
+        let newSpawnTimes = [];
+        for (let k = 0; k < maxTime; k++) {
+            if (k % incrementForSpawn === 0) {
+                newSpawnTimes.push(k);
+            }
+        }
+        setTimesToSpawn(newSpawnTimes);
+
+        newCells[current].status = "Selected";
+
+        setCells(newCells);
+    }
+
+    useEffect(() => {
+        const newCells = [];
+
+        for (let i = 0; i < noCols; i++) {
+            for (let j = 0; j < noRows; j++) {
+                let contents = "";
+                if (i >= 3 && i <=6 && j >= 3 && j <=7 ) {
+                    contents = "DATA";
+                }
+                else {
+                    contents = "";
+                }
+                newCells.push({
+                    colStart: i + 1,
+                    colEnd: i + 2,
+                    rowStart: j + 1,
+                    rowEnd: j + 2,
+                    contents: contents,
+                    status: "None"
+                });
+            }
+        }
+
+        let newSpawnTimes = [];
+        for (let k = 0; k < maxTime; k++) {
+            if (k % incrementForSpawn === 0) {
+                newSpawnTimes.push(k);
+            }
+        }
+        setTimesToSpawn(newSpawnTimes);
 
         newCells[current].status = "Selected";
 
@@ -711,10 +785,59 @@ function LevelOne() {
             setGameOver(1);
         }
         timeElapsed.current = Math.round(secondsElapsed);
+        if (timesToSpawn.includes(timeElapsed.current)) {
+            let newTimes = timesToSpawn.slice(0);
+            newTimes.splice(newTimes.indexOf(timeElapsed.current), 1);
+            setTimesToSpawn(newTimes);
+            spawn();
+        }
         if (timeElapsed.current < -1000 || timeElapsed.current > 1000) {
             timeElapsed.current = 0;
         }
     });
+
+    const spawn = () => {
+        let newCells = cells.slice(0);
+        for (let b = 0; b < permanentPotential.length; b++) {
+            let rand = Math.round(Math.random() * 10);
+            if (rand === 1) {
+                let newSquare = permanentPotential[b];
+                newCells[newSquare].contents = "#ERR";
+                if (newSquare + 1 <= max && (newSquare + 1) % noRows !== 0 && !tempPotential.includes(newSquare + 1)) {
+                    tempPotential.push(newSquare + 1);
+                }
+                if (newSquare - 1 >= min && (newSquare) % noRows !== 0 && !tempPotential.includes(newSquare - 1)) {
+                    tempPotential.push(newSquare - 1);
+                }
+                if (newSquare + 15 <= max && !tempPotential.includes(newSquare + 15)) {
+                    tempPotential.push(newSquare + 15);
+                }
+                if (newSquare - 15 >= min && !tempPotential.includes(newSquare - 15)) {
+                    tempPotential.push(newSquare - 15);
+                }
+            }
+        }
+        for (let c = 0; c < tempPotential.length; c++) {
+            let rand = Math.round(Math.random() * 10);
+            if (rand === 1) {
+                let newSquare = tempPotential[c];
+                newCells[newSquare].contents = "#ERR";
+                if (newSquare + 1 <= max && (newSquare + 1) % noRows !== 0 && !tempPotential.includes(newSquare + 1)) {
+                    tempPotential.push(newSquare + 1);
+                }
+                if (newSquare - 1 >= min && (newSquare) % noRows !== 0 && !tempPotential.includes(newSquare - 1)) {
+                    tempPotential.push(newSquare - 1);
+                }
+                if (newSquare + 15 <= max && !tempPotential.includes(newSquare + 15)) {
+                    tempPotential.push(newSquare + 15);
+                }
+                if (newSquare - 15 >= min && !tempPotential.includes(newSquare - 15)) {
+                    tempPotential.push(newSquare - 15);
+                }
+            }
+        }
+        setCells(newCells);
+    };
 
     return (
         <>
