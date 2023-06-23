@@ -55,13 +55,12 @@ function LevelOne() {
                     }
                     if (commandPressed === 1) {
                         // set up variables for while loop - starting on the current cell to iterate through until the stopping cell is found
-                        let proposedNewCell = current;
+                        let proposedNewCell = edgeY;
                         let canContinue = true;
                         let currentContent = cells[current].contents;
                         let nextContent = cells[(current + 1 > max ? current : current + 1)].contents;
                         // if the shift key is held and the user is moving in the same direction as the last move, use the edge Y instead of current
                         if (event.shiftKey && lastYMove === 1) {
-                            proposedNewCell = edgeY;
                             currentContent = cells[edgeY].contents;
                             nextContent = cells[(edgeY + 1 > max ? edgeY : edgeY + 1)].contents;
                         }
@@ -193,6 +192,15 @@ function LevelOne() {
                         }
                         else {
                             editStatus(current, current, "Selected");
+                            setEdgeY(current);
+                            setEdgeX(current);
+                            for (let l = 0; l < cells.length; l++) {
+                                    if (l !== current) {
+                                        cells[l].status = "None";
+                                    }
+                                }
+                            setSelectMultipleY(0);
+                            setSelectMultipleX(0);
                         }
                     }
                     setLastYMove(1);
@@ -204,13 +212,12 @@ function LevelOne() {
                     }
                     if (commandPressed === 1) {
                         // set up variables for while loop - starting on the current cell to iterate through until the stopping cell is found
-                        let proposedNewCell = current;
+                        let proposedNewCell = edgeY;
                         let canContinue = true;
                         let currentContent = cells[current].contents;
                         let nextContent = cells[(current - 1 < min ? current : current - 1)].contents;
                         // if the shift key is held and the user is moving in the same direction as the last move, use the edge Y instead of current
                         if (event.shiftKey && lastYMove === -1) {
-                            proposedNewCell = edgeY;
                             currentContent = cells[edgeY].contents;
                             nextContent = cells[(edgeY - 1 < min ? edgeY : edgeY - 1)].contents;
                         }
@@ -342,6 +349,15 @@ function LevelOne() {
                         }
                         else {
                             editStatus(current, current, "Selected");
+                            setEdgeY(current);
+                            setEdgeX(current);
+                            for (let l = 0; l < cells.length; l++) {
+                                    if (l !== current) {
+                                        cells[l].status = "None";
+                                    }
+                                }
+                            setSelectMultipleY(0);
+                            setSelectMultipleX(0);
                         }
                     }
                     setLastYMove(-1);
@@ -353,13 +369,12 @@ function LevelOne() {
                     }
                     if (commandPressed === 1) {
                         // set up variables for while loop - starting on the current cell to iterate through until the stopping cell is found
-                        let proposedNewCell = current;
+                        let proposedNewCell = edgeX;
                         let canContinue = true;
                         let currentContent = cells[current].contents;
                         let nextContent = cells[(current + noRows > max ? current : current + noRows)].contents;
                         // if the shift key is held and the user is moving in the same direction as the last move, use the edge Y instead of current
                         if (event.shiftKey && lastXMove === 1) {
-                            proposedNewCell = edgeX;
                             currentContent = cells[edgeX].contents;
                             nextContent = cells[(edgeX + noRows > max ? edgeX : edgeX + noRows)].contents;
                         }
@@ -491,6 +506,15 @@ function LevelOne() {
                         }
                         else {
                             editStatus(current, current, "Selected");
+                            setEdgeY(current);
+                            setEdgeX(current);
+                            for (let l = 0; l < cells.length; l++) {
+                                    if (l !== current) {
+                                        cells[l].status = "None";
+                                    }
+                                }
+                            setSelectMultipleY(0);
+                            setSelectMultipleX(0);
                         }
                     }
                     setLastXMove(1);
@@ -502,13 +526,12 @@ function LevelOne() {
                     }
                     if (commandPressed === 1) {
                         // set up variables for while loop - starting on the current cell to iterate through until the stopping cell is found
-                        let proposedNewCell = current;
+                        let proposedNewCell = edgeX;
                         let canContinue = true;
                         let currentContent = cells[current].contents;
                         let nextContent = cells[(current - noRows < min ? current : current - noRows)].contents;
                         // if the shift key is held and the user is moving in the same direction as the last move, use the edge Y instead of current
                         if (event.shiftKey && lastXMove === -1) {
-                            proposedNewCell = edgeX;
                             currentContent = cells[edgeX].contents;
                             nextContent = cells[(edgeX - noRows < min ? edgeX : edgeX - noRows)].contents;
                         }
@@ -640,6 +663,15 @@ function LevelOne() {
                         }
                         else {
                             editStatus(current, current, "Selected");
+                            setEdgeY(current);
+                            setEdgeX(current);
+                            for (let l = 0; l < cells.length; l++) {
+                                    if (l !== current) {
+                                        cells[l].status = "None";
+                                    }
+                                }
+                            setSelectMultipleY(0);
+                            setSelectMultipleX(0);
                         }
                     }
                     setLastXMove(-1);
