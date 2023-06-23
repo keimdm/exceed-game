@@ -35,7 +35,6 @@ function LevelOne() {
         prevCells[current].status = "None";
         prevCells[target].status = newStatus;
         setCurrent(target);
- 
         setCells(prevCells);
     };
 
@@ -192,6 +191,9 @@ function LevelOne() {
 
                             }
                         }
+                        else {
+                            editStatus(current, current, "Selected");
+                        }
                     }
                     setLastYMove(1);
                 break;
@@ -337,6 +339,9 @@ function LevelOne() {
                                 setSelectMultipleX(0);
 
                             }
+                        }
+                        else {
+                            editStatus(current, current, "Selected");
                         }
                     }
                     setLastYMove(-1);
@@ -484,6 +489,9 @@ function LevelOne() {
 
                             }
                         }
+                        else {
+                            editStatus(current, current, "Selected");
+                        }
                     }
                     setLastXMove(1);
                 break;
@@ -629,6 +637,9 @@ function LevelOne() {
                                 setSelectMultipleX(0);
 
                             }
+                        }
+                        else {
+                            editStatus(current, current, "Selected");
                         }
                     }
                     setLastXMove(-1);
