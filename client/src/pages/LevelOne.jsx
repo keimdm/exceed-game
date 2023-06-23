@@ -21,10 +21,12 @@ function LevelOne() {
     const [timesToSpawn, setTimesToSpawn] = useState([]);
     const [tempPotential, setTempPotential] = useState([]);
     const [score, setScore] = useState(0);
+    const [maxData, setMaxData] = useState(0);
+    const [dataLeft, setDataLeft] = useState(0);
     const timeElapsed = useRef(0);
     const incrementForSpawn = 2;
     const scoreIncrement = 10;
-    const maxTime = 60;
+    const maxTime = 15;
     const min = 0;
     const max = 149;
     const noCols = 10;
@@ -47,9 +49,14 @@ function LevelOne() {
             setStartTime(Date.now());
             setGameRunning(1);
             const newCells = cells.slice(0);
+            let dataCount = 0;
             for (let e = 0; e < newCells.length; e++) {
                 newCells[e].status = "None";
+                if (newCells[e].contents === "DATA") {
+                    dataCount = dataCount + 1;
+                }
             }
+            setMaxData(dataCount);
             editStatus(0, 0, "Selected");
 
         }
@@ -754,6 +761,8 @@ function LevelOne() {
         setTempPotential([])
         setScore(0);
         const newCells = [];
+        setMaxData(0);
+        setDataLeft(0);
 
         for (let i = 0; i < noCols; i++) {
             for (let j = 0; j < noRows; j++) {
@@ -838,6 +847,15 @@ function LevelOne() {
         const currentTime = Date.now();
         const secondsElapsed = (currentTime - startTime) / 1000;
         if (secondsElapsed > maxTime + 1 && gameRunning === 1) {
+            let dataRemaining = 0;
+            for (let p = 0; p < cells.length; p++) {
+                if (cells[p].contents === "DATA") {
+                    dataRemaining = dataRemaining + 1;
+                }
+            }
+            setDataLeft(dataRemaining);
+            console.log(maxData);
+            console.log(dataRemaining);
             setGameRunning(0);
             setGameOver(1);
         }
@@ -934,7 +952,9 @@ function LevelOne() {
                                 h="500px"
                             >
                                 <Text>Game Over!</Text>
-                                <Text>{"Your Score: " + score}</Text>
+                                <Text>{"Raw Score: " + score}</Text>
+                                <Text>{"Data Remaining: " + Math.round(dataLeft * 100 / maxData) + "%"}</Text>
+                                <Text>{"Final Score: " + Math.round(score * dataLeft / maxData)}</Text>
                                 <Button onClick={handlePlayAgain}>Play Again</Button>
                                 <Link to={`/scores`}>
                                     <Button>High Scores</Button>
