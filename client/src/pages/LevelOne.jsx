@@ -1,4 +1,4 @@
-import { Button, Grid, Text } from '@chakra-ui/react';
+import { Button, Grid, Text, Box } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import Cell from '../components/Cell.jsx'
 import { useState, useEffect, useRef } from 'react';
@@ -20,8 +20,10 @@ function LevelOne() {
     const [gameOver, setGameOver] = useState(0);
     const [timesToSpawn, setTimesToSpawn] = useState([]);
     const [tempPotential, setTempPotential] = useState([]);
+    const [score, setScore] = useState(0);
     const timeElapsed = useRef(0);
     const incrementForSpawn = 2;
+    const scoreIncrement = 10;
     const maxTime = 60;
     const min = 0;
     const max = 149;
@@ -44,6 +46,12 @@ function LevelOne() {
         if (gameRunning === 0) {
             setStartTime(Date.now());
             setGameRunning(1);
+            const newCells = cells.slice(0);
+            for (let e = 0; e < newCells.length; e++) {
+                newCells[e].status = "None";
+            }
+            editStatus(0, 0, "Selected");
+
         }
         else {
             const code = event.code;
@@ -685,8 +693,12 @@ function LevelOne() {
                 case "Backspace":
                     let newCells = cells.slice(0);
                     let newTempPotential = [];
+                    let newScore = score;
                     for (let q = 0; q < newCells.length; q++) {
                         if (newCells[q].status === "Selected") {
+                            if (newCells[q].contents === "#ERR") {
+                                newScore = newScore + scoreIncrement;
+                            }
                             newCells[q].contents = "";
                         }
                         if (newCells[q].contents === "#ERR") {
@@ -704,6 +716,7 @@ function LevelOne() {
                             }
                         }
                     }
+                    setScore(newScore);
                     setCells(newCells);
                     setTempPotential(newTempPotential);
                 break;
@@ -739,6 +752,7 @@ function LevelOne() {
         setStartTime(0);
         setTimesToSpawn([]);
         setTempPotential([])
+        setScore(0);
         const newCells = [];
 
         for (let i = 0; i < noCols; i++) {
@@ -887,7 +901,8 @@ function LevelOne() {
             <p>Level One</p>
             {gameRunning === 1 ? (
                 <>
-                    <p>{maxTime - timeElapsed.current < 0 ? 0 : maxTime - timeElapsed.current}</p>
+                    <Text>{maxTime - timeElapsed.current < 0 ? 0 : maxTime - timeElapsed.current}</Text>
+                    <Text>{"Score: " + score}</Text>
                     <div
                         tabIndex={-1}
                         onKeyDown={handleKeyDown}  
@@ -914,16 +929,17 @@ function LevelOne() {
                         <div
                             tabIndex={-1}
                         >
-                            <Grid
+                            <Box
                                 w="800px"
                                 h="500px"
                             >
                                 <Text>Game Over!</Text>
+                                <Text>{"Your Score: " + score}</Text>
                                 <Button onClick={handlePlayAgain}>Play Again</Button>
                                 <Link to={`/scores`}>
                                     <Button>High Scores</Button>
                                 </Link>
-                            </Grid>
+                            </Box>
                         </div>
                     </>
                 ) : (
@@ -932,12 +948,12 @@ function LevelOne() {
                             tabIndex={-1}
                             onKeyDown={handleKeyDown} 
                         >
-                            <Grid
+                            <Box
                                 w="800px"
                                 h="500px"
                             >
                                 <Text>Press any key to start!</Text>
-                            </Grid>
+                            </Box>
                         </div>
                     </>
                 )
