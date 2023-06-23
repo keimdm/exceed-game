@@ -1,4 +1,4 @@
-import { Button, Grid, Text, Box } from '@chakra-ui/react';
+import { Button, Grid, Text, Box, Input } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import Cell from '../components/Cell.jsx'
 import { useState, useEffect, useRef } from 'react';
@@ -33,7 +33,6 @@ function LevelOne() {
     const noRows = 15;
     const permanentPotential = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149];
 
-
     const editStatus = (current, target, newStatus) => {
         const prevCells = cells.slice(0);
         prevCells[current].status = "None";
@@ -45,7 +44,7 @@ function LevelOne() {
     const handleKeyDown = (event) => {
         event.preventDefault();
         console.log(event);
-        if (gameRunning === 0) {
+        if (gameRunning === 0 && gameOver === 0) {
             setStartTime(Date.now());
             setGameRunning(1);
             const newCells = cells.slice(0);
@@ -743,6 +742,15 @@ function LevelOne() {
         }
     }
 
+    const handleClicks = (event) => {
+        if (gameRunning === 1) {
+            event.preventDefault();
+        }
+        else if (gameRunning === 0 && gameOver === 0) {
+            event.preventDefault();
+        }
+    }
+
     const handlePlayAgain = (event) => {
         setGameRunning(0);
         setGameOver(0);
@@ -763,6 +771,7 @@ function LevelOne() {
         const newCells = [];
         setMaxData(0);
         setDataLeft(0);
+        window.location.assign('/level-one');
 
         for (let i = 0; i < noCols; i++) {
             for (let j = 0; j < noRows; j++) {
@@ -915,16 +924,26 @@ function LevelOne() {
     };
 
     return (
-        <>
+        <Box
+            h="100vh"
+            bgColor="gray.400"
+            onMouseDown={handleClicks}
+        >
             <p>Level One</p>
+            <Input
+                autoFocus
+                onKeyDown={handleKeyDown}
+                onKeyUp={handleKeyUp}
+                opacity={0}
+            />
             {gameRunning === 1 ? (
                 <>
                     <Text>{maxTime - timeElapsed.current < 0 ? 0 : maxTime - timeElapsed.current}</Text>
                     <Text>{"Score: " + score}</Text>
-                    <div
+                    <Box
                         tabIndex={-1}
-                        onKeyDown={handleKeyDown}  
-                        onKeyUp={handleKeyUp}  
+                        onKeyDown={handleKeyDown}
+                        onKeyUp={handleKeyUp}
                     >
                         <Grid
                             w="800px"
@@ -939,7 +958,7 @@ function LevelOne() {
                                 ))
                             }
                         </Grid>
-                    </div>
+                    </Box>
                 </>
             ) : (
                 gameOver === 1 ? (
@@ -967,6 +986,7 @@ function LevelOne() {
                         <div
                             tabIndex={-1}
                             onKeyDown={handleKeyDown} 
+                            onMouseDown={handleClicks}
                         >
                             <Box
                                 w="800px"
@@ -984,7 +1004,7 @@ function LevelOne() {
                     Level Select
                 </Button>
             </Link>
-        </>
+        </Box>
     )
 }
   
