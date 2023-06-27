@@ -1,54 +1,142 @@
 import { loggedIn, login, logout } from '../utils/auth';
-import { Button } from '@chakra-ui/react';
+import { Button, Card, Box, Text, Heading } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
+import Header from "../components/Header.jsx";
 
 function Home() {
 
-    const signOut = async () => {
-        logout();
-    }
-
     return (
       <>
-        <p>Home</p>
-        {loggedIn() ? (
-            <>
-                <Link to={`/levels`}>
-                    <Button>
-                        Select a Level
-                    </Button>
-                </Link>
-                <Link to={`/scores`}>
-                    <Button>
-                        View High Scores
-                    </Button>
-                </Link>
-                <Link to={`/account`}>
-                    <Button>
-                        View Account Details
-                    </Button>
-                </Link>
-                <Button
-                    onClick={signOut}
-                >
-                    Log Out
-                </Button>
-            </>
-        ) : (
-            <>
-                <Link to={`/login`}>
-                    <Button>
-                    Log In
-                    </Button>
-                </Link>
-                <Link to={`/signup`}>
-                    <Button>
-                        Sign Up
-                    </Button>
-                </Link>
-            </>
-        )
-        }
+        <Box
+            w="100%"
+            h="100vh"
+            bgColor="brand.gray"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+        >
+            <Header />
+            {loggedIn() ? (
+                <>
+                    <Card
+                        w="60%"
+                        h="50%"
+                        my={12}
+                        display="flex"
+                        flexDirection="row"
+                    >
+                        <Box
+                            w="50%"
+                            h="100%"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="center"
+                            alignItems="center"
+                            textAlign="center"
+                        >
+                            <Heading
+                                variant="orange"
+                            >
+                                Welcome to Exceed!
+                            </Heading>
+                        </Box>
+                        <Box
+                            w="50%"
+                            h="100%"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="space-around"
+                            alignItems="center"
+                            textAlign="center"
+                        >
+                            <Heading
+                                variant="subheading"
+                            >
+                                Click below to get started:
+                            </Heading>
+                            <Box
+                                display="flex"
+                                flexDirection="column"
+                            >
+                                <Link to={`/levels`}>
+                                    <Button
+                                        variant="brand"
+                                        my={3}
+                                    >
+                                        Select a Level
+                                    </Button>
+                                </Link>
+                                <Link to={`/scores`}>
+                                    <Button variant="brand">
+                                        View High Scores
+                                    </Button>
+                                </Link>
+                            </Box>
+                        </Box>
+                    </Card>
+                </>
+            ) : (
+                <>
+                    <Card
+                        w="60%"
+                        h="50%"
+                        my={12}
+                        display="flex"
+                        flexDirection="row"
+                    >
+                        <Box
+                            w="50%"
+                            h="100%"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="center"
+                            alignItems="center"
+                            textAlign="center"
+                        >
+                            <Heading
+                                variant="orange"
+                            >
+                                Welcome to Exceed!
+                            </Heading>
+                        </Box>
+                        <Box
+                            w="50%"
+                            h="100%"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="space-around"
+                            alignItems="center"
+                            textAlign="center"
+                        >
+                            <Heading
+                                variant="subheading"
+                            >
+                                Exceed is a spreadsheet training tool that uses a game to teach users how to navigate a spreadsheet efficiently.
+                            </Heading>
+                            <Box
+                                display="flex"
+                                flexDirection="column"
+                            >
+                                <Link to={`/login`}>
+                                    <Button
+                                        variant="brand"
+                                        my={3}
+                                    >
+                                        Log In
+                                    </Button>
+                                </Link>
+                                <Link to={`/signup`}>
+                                    <Button variant="brand">
+                                        Sign Up
+                                    </Button>
+                                </Link>
+                            </Box>
+                        </Box>
+                    </Card>
+                </>
+            )
+            }
+        </Box>
       </>
     )
   }

@@ -6,11 +6,45 @@ const theme = extendTheme({
 	},
 	colors: {
 		brand: {
-			100: "#000000",
-			200: "#FFFFFF",
-			300: "#0D968B"
+			"black": "#000000",
+			"white": "#FFFFFF",
+			"orange": "#F34213",
+            "gray": "#E2E8F0",
+            "dark-blue": "#2C365E"
 		}
-	}
+	},
+    components: {
+        Button: {
+            variants: {
+                "brand": {
+                    bgColor: "brand.orange",
+                    color: "brand.white",
+                    _hover: {
+                        bgColor: "brand.white",
+                        color: "brand.orange",
+                        borderColor: "brand.orange",
+                        borderWidth: "2px"
+                    }
+                }
+            }
+        },
+        Heading: {
+            variants: {
+                "orange": {
+                    color: "brand.orange",
+                    fontSize: "5xl",
+                },
+                "blue": {
+                    color: "brand.dark-blue"
+                },
+                "subheading": {
+                    color: "brand.black",
+                    fontSize: "2xl"
+        
+                },
+            }
+        }
+    }
 });
 
 export default theme;
