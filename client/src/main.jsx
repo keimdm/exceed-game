@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { ChakraProvider, theme } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "./theme/theme.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //import SampleApi from './components/SampleApi.jsx'
 import Home from './pages/Home.jsx'
