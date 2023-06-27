@@ -19,11 +19,12 @@ function Cell({colStart, colEnd, rowStart, rowEnd, contents, index, status}) {
             rowEnd={rowEnd}
             bgColor={color}
             color="black"
-            borderColor="gray.400"
+            borderColor="brand.gray"
             borderWidth="1px"
             display="flex"
             alignItems="center"
             pl={2}
+            borderRadius="5px"
         >
             <Text>{contents}</Text>
         </GridItem>

@@ -1,7 +1,8 @@
 import { loggedIn, login } from '../utils/auth';
-import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, Input, Box, Card, Heading } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
+import Header from "../components/Header.jsx";
 
 function SignUp() {
 
@@ -57,29 +58,49 @@ function SignUp() {
 
     return (
       <>
-        <p>Sign Up</p>
-        <>
-            <FormControl>
-                <FormLabel>Username</FormLabel>
-                <Input placeholder='Username' onChange={updateUsername}/>
-                <FormLabel>Email</FormLabel>
-                <Input placeholder='Email' onChange={updateEmail}/>
-                <FormLabel>Password</FormLabel>
-                <Input placeholder='Password' onChange={updatePassword}/>
-                <FormLabel>Confirm Password</FormLabel>
-                <Input placeholder='Confirm Password' onChange={updateConfirm}/>
-            </FormControl>
-            <Button
-                onClick={signIn}
+        <Box
+            w="100%"
+            h="100vh"
+            bgColor="brand.gray"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+        >
+            <Header />
+            <Card
+                w="60%"
+                h="80%"
+                my={12}
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-around"
+                alignItems="center"
+                p={10}
             >
-                Submit
-            </Button>
-            <Link to={`/`}>
-                <Button>
-                    Home Page
+                <Heading
+                    variant="blue"
+                >
+                    Sign Up
+                </Heading>
+                <FormControl>
+                <FormLabel>Username</FormLabel>
+                <Input placeholder='Username' onChange={updateUsername} mb={3}/>
+                <FormLabel>Email</FormLabel>
+                <Input placeholder='Email' onChange={updateEmail} mb={3}/>
+                <FormLabel>Password</FormLabel>
+                <Input placeholder='Password' onChange={updatePassword} mb={3}/>
+                <FormLabel>Confirm Password</FormLabel>
+                <Input placeholder='Confirm Password' onChange={updateConfirm} mb={3}/>
+                </FormControl>
+                <Button
+                    onClick={signIn}
+                    variant="brand"
+                    w="20%"
+                >
+                    Submit
                 </Button>
-            </Link>
-        </>
+            </Card>
+        </Box>
       </>
     )
   }

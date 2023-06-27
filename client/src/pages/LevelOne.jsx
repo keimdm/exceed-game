@@ -1,7 +1,9 @@
-import { Button, Grid, Text, Box, Input } from '@chakra-ui/react';
+import { Button, Grid, Text, Box, Input, Card, Heading } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import Cell from '../components/Cell.jsx'
 import { useState, useEffect, useRef } from 'react';
+import Header from "../components/Header.jsx";
+import { loggedIn } from '../utils/auth';
 
 function LevelOne() {
 
@@ -925,86 +927,152 @@ function LevelOne() {
 
     return (
         <Box
+            w="100%"
             h="100vh"
-            bgColor="gray.400"
+            bgColor="brand.gray"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
             onMouseDown={handleClicks}
         >
-            <p>Level One</p>
-            <Input
-                autoFocus
-                onKeyDown={handleKeyDown}
-                onKeyUp={handleKeyUp}
-                opacity={0}
-            />
-            {gameRunning === 1 ? (
-                <>
-                    <Text>{maxTime - timeElapsed.current < 0 ? 0 : maxTime - timeElapsed.current}</Text>
-                    <Text>{"Score: " + score}</Text>
-                    <Box
-                        tabIndex={-1}
+            <Header />
+            {loggedIn() ? (
+                <Box
+                    onMouseDown={handleClicks}
+                >
+                    <Input
+                        autoFocus
                         onKeyDown={handleKeyDown}
                         onKeyUp={handleKeyUp}
-                    >
-                        <Grid
-                            w="800px"
-                            h="500px"
-                            bgColor="red.500"
-                            templateColumns={"repeat(" + noCols + ", 1fr)"}
-                            templateRows={"repeat(" + noRows + ", 1fr)"}
-                        >
-                            {
-                                cells.map((cell, index) => (
-                                    <Cell colStart={cell.colStart} colEnd={cell.colEnd} rowStart={cell.rowStart} rowEnd={cell.rowEnd} contents={cell.contents} key={index} index={index} status={cell.status} />
-                                ))
-                            }
-                        </Grid>
-                    </Box>
-                </>
+                        opacity={0}
+                    />
+                    {gameRunning === 1 ? (
+                        <>
+                            <Heading
+                                variant="subheading"
+                                textAlign="center"
+                                mb={3}
+                            >
+                                {"Time: " + (maxTime - timeElapsed.current < 0 ? 0 : maxTime - timeElapsed.current)}
+                            </Heading>
+                            <Heading
+                                variant="subheading"
+                                textAlign="center"
+                                mb={3}
+                            >
+                                {"Score: " + score}
+                            </Heading>
+                            <Box
+                                tabIndex={-1}
+                                onKeyDown={handleKeyDown}
+                                onKeyUp={handleKeyUp}
+                            >
+                                <Grid
+                                    w="800px"
+                                    h="500px"
+                                    bgColor="brand.gray"
+                                    templateColumns={"repeat(" + noCols + ", 1fr)"}
+                                    templateRows={"repeat(" + noRows + ", 1fr)"}
+                                >
+                                    {
+                                        cells.map((cell, index) => (
+                                            <Cell colStart={cell.colStart} colEnd={cell.colEnd} rowStart={cell.rowStart} rowEnd={cell.rowEnd} contents={cell.contents} key={index} index={index} status={cell.status} />
+                                        ))
+                                    }
+                                </Grid>
+                            </Box>
+                        </>
+                    ) : (
+                        gameOver === 1 ? (
+                            <>
+                                <div
+                                    tabIndex={-1}
+                                >
+                                    <Card
+                                        w="800px"
+                                        h="500px"
+                                        my={12}
+                                        display="flex"
+                                        flexDirection="column"
+                                        justifyContent="space-around"
+                                        alignItems="center"
+                                        p={10}
+                                    >
+                                        <Heading variant="blue">Game Over!</Heading>
+                                        <Box>
+                                            <Heading variant="subheading" mb={2}>{"Raw Score: " + score}</Heading>
+                                            <Heading variant="subheading" mb={2}>{"Data Remaining: " + Math.round(dataLeft * 100 / maxData) + "%"}</Heading>
+                                            <Heading variant="subheading" mb={2}>{"Final Score: " + Math.round(score * dataLeft / maxData)}</Heading>
+                                        </Box>
+                                        
+                                        <Box
+                                            w="30%"
+                                        >
+                                            <Button variant="brand" onClick={handlePlayAgain} mb={3}>Play Again</Button>
+                                            <Link to={`/scores`}>
+                                                <Button variant="brand">High Scores</Button>
+                                            </Link>
+                                        </Box>
+                                    </Card>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div
+                                    tabIndex={-1}
+                                    onKeyDown={handleKeyDown} 
+                                    onMouseDown={handleClicks}
+                                >
+                                    <Card
+                                        w="800px"
+                                        h="500px"
+                                        my={12}
+                                        display="flex"
+                                        flexDirection="column"
+                                        justifyContent="space-around"
+                                        alignItems="center"
+                                        p={10}
+                                    >
+                                        <Heading
+                                            variant="blue"
+                                        >
+                                            Level 1
+                                        </Heading>
+                                        <Heading
+                                            variant="subheading"
+                                        >
+                                            Press any key to start!
+                                        </Heading>
+                                    </Card>
+                                </div>
+                            </>
+                        )
+                        
+                    )}
+                </Box>
             ) : (
-                gameOver === 1 ? (
-                    <>
-                        <div
-                            tabIndex={-1}
+                <>
+                    <Card
+                        w="60%"
+                        h="50%"
+                        my={12}
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="space-around"
+                        alignItems="center"
+                        p={10}
+                        textAlign="center"
+                    >
+                        <Heading
+                            variant="subheading"
                         >
-                            <Box
-                                w="800px"
-                                h="500px"
-                            >
-                                <Text>Game Over!</Text>
-                                <Text>{"Raw Score: " + score}</Text>
-                                <Text>{"Data Remaining: " + Math.round(dataLeft * 100 / maxData) + "%"}</Text>
-                                <Text>{"Final Score: " + Math.round(score * dataLeft / maxData)}</Text>
-                                <Button onClick={handlePlayAgain}>Play Again</Button>
-                                <Link to={`/scores`}>
-                                    <Button>High Scores</Button>
-                                </Link>
-                            </Box>
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <div
-                            tabIndex={-1}
-                            onKeyDown={handleKeyDown} 
-                            onMouseDown={handleClicks}
-                        >
-                            <Box
-                                w="800px"
-                                h="500px"
-                            >
-                                <Text>Press any key to start!</Text>
-                            </Box>
-                        </div>
-                    </>
-                )
-                
+                            Sorry - you are not authorized to view this page! Please log in and try again.
+                        </Heading>
+                    </Card>
+                </>
             )}
-            <Link to={`/levels`}>
-                <Button>
-                    Level Select
-                </Button>
-            </Link>
         </Box>
+       
     )
 }
   

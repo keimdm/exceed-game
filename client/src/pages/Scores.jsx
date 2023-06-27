@@ -1,37 +1,64 @@
 import { loggedIn } from '../utils/auth';
-import { Button } from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, Input, Box, Card, Heading } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
+import Header from "../components/Header.jsx";
 
 function Scores() {
 
     return (
-      <>
-        {loggedIn() ? (
-            <>
-                <p>Scores</p>
-                <Link to={`/`}>
-                    <Button>
-                        Home Page
-                    </Button>
-                </Link>
-            </>
-        ) : (
-            <>
-                <p>Sorry - you are not authorized to view this page! Please log in and try again.</p>
-                <Link to={`/login`}>
-                    <Button>
-                    Log In
-                    </Button>
-                </Link>
-                <Link to={`/signup`}>
-                    <Button>
-                        Sign Up
-                    </Button>
-                </Link>
-            </>
-        )
-        }
-      </>
+        <>
+            <Box
+                w="100%"
+                h="100vh"
+                bgColor="brand.gray"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+            >
+                <Header />
+                {loggedIn() ? (
+                    <>
+                        <Card
+                            w="60%"
+                            h="50%"
+                            my={12}
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="space-around"
+                            alignItems="center"
+                            p={10}
+                        >   
+                            <Heading
+                                variant="blue"
+                            >
+                                High Scores
+                            </Heading>
+                        </Card>
+                    </>
+                ) : (
+                    <>
+                        <Card
+                            w="60%"
+                            h="50%"
+                            my={12}
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="space-around"
+                            alignItems="center"
+                            p={10}
+                            textAlign="center"
+                        >
+                            <Heading
+                                variant="subheading"
+                            >
+                                Sorry - you are not authorized to view this page! Please log in and try again.
+                            </Heading>
+                        </Card>
+                    </>
+                )
+                }
+            </Box>
+        </>
     )
 }
   

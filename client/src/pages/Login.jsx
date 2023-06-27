@@ -68,6 +68,7 @@ function Login() {
                         justifyContent="space-around"
                         alignItems="center"
                         p={10}
+                        textAlign="center"
                     >
                         <Heading
                             variant="subheading"
@@ -102,7 +103,7 @@ function Login() {
                         <Button
                             onClick={signIn}
                             variant="brand"
-                            w="30%"
+                            w="20%"
                         >
                             Log In
                         </Button>
