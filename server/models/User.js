@@ -7,6 +7,9 @@ const userSchema = new Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  scores: {type: Map, of: Number, default: {}},
+  opsys: {type: String, default: "Mac"},
+  mode: {type: String, default: "desktop"}
 });
 
 userSchema.pre("save", async function (next) {
