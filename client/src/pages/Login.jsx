@@ -1,7 +1,8 @@
 import { loggedIn, login } from '../utils/auth';
-import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, Input, Box, Card, Heading } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
+import Header from "../components/Header.jsx";
 
 function Login() {
 
@@ -47,37 +48,70 @@ function Login() {
 
     return (
       <>
-        <p>Login</p>
-        {loggedIn() ? (
-            <>
-                <p>You are already logged in!</p>
-                <Link to={`/`}>
-                    <Button>
-                        Return to Home Page
-                    </Button>
-                </Link>
-            </>
-        ) : (
-            <>
-                <FormControl>
-                    <FormLabel>Email</FormLabel>
-                    <Input placeholder='Email' onChange={updateEmail}/>
-                    <FormLabel>Password</FormLabel>
-                    <Input placeholder='Password' onChange={updatePassword}/>
-                </FormControl>
-                <Button
-                    onClick={signIn}
-                >
-                    Log In
-                </Button>
-                <Link to={`/`}>
-                    <Button>
-                        Home Page
-                    </Button>
-                </Link>
-            </>
-        )
-        }
+        <Box
+            w="100%"
+            h="100vh"
+            bgColor="brand.gray"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+        >
+            <Header />
+            {loggedIn() ? (
+                <>
+                    <Card
+                        w="60%"
+                        h="50%"
+                        my={12}
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="space-around"
+                        alignItems="center"
+                        p={10}
+                    >
+                        <Heading
+                            variant="subheading"
+                        >
+                            You are already logged in!
+                        </Heading>
+                    </Card>
+                </>
+            ) : (
+                <>
+                    <Card
+                        w="60%"
+                        h="50%"
+                        my={12}
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="space-around"
+                        alignItems="center"
+                        p={10}
+                    >
+                        <Heading
+                            variant="blue"
+                        >
+                            Log In
+                        </Heading>
+                        <FormControl>
+                        <FormLabel>Email</FormLabel>
+                        <Input placeholder='Email' onChange={updateEmail} mb={3}/>
+                        <FormLabel>Password</FormLabel>
+                        <Input placeholder='Password' onChange={updatePassword} mb={3}/>
+                        </FormControl>
+                        <Button
+                            onClick={signIn}
+                            variant="brand"
+                            w="30%"
+                        >
+                            Log In
+                        </Button>
+                    </Card>
+                </>
+            )
+            }
+        </Box>
+        
       </>
     )
   }
