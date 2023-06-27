@@ -60,8 +60,7 @@ router.post('/users/login/', async (req, res) => {
       }
 
       const token = signToken(user);
-      console.log(user._id.toString());
-      res.json({ message: `User with name ${user.username} logged in`, token, userId: user._id.toString() });
+      res.json({ message: `User with name ${user.username} logged in`, token});
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
