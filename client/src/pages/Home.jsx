@@ -33,9 +33,10 @@ function Home() {
                             justifyContent="center"
                             alignItems="center"
                             textAlign="center"
+                            p={10}
                         >
                             <Heading
-                                variant="orange"
+                                variant="blue"
                             >
                                 Welcome to Exceed!
                             </Heading>
@@ -94,7 +95,7 @@ function Home() {
                             textAlign="center"
                         >
                             <Heading
-                                variant="orange"
+                                variant="blue"
                             >
                                 Welcome to Exceed!
                             </Heading>
@@ -107,6 +108,7 @@ function Home() {
                             justifyContent="space-around"
                             alignItems="center"
                             textAlign="center"
+                            p={10}
                         >
                             <Heading
                                 variant="subheading"

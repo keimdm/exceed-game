@@ -13,7 +13,7 @@ function Header() {
 			<Box
 				w="100%"
 				h="50px"
-				bgColor="brand.orange"
+				bgColor="brand.dark-blue"
 				display="flex"
 				flexDirection="row"
 				justifyContent="space-between"

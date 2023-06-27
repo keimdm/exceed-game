@@ -17,13 +17,12 @@ const theme = extendTheme({
         Button: {
             variants: {
                 "brand": {
-                    bgColor: "brand.orange",
+                    bgColor: "brand.dark-blue",
                     color: "brand.white",
+                    w: "100%",
                     _hover: {
-                        bgColor: "brand.white",
-                        color: "brand.orange",
-                        borderColor: "brand.orange",
-                        borderWidth: "2px"
+                        bgColor: "brand.orange",
+                        color: "brand.white",
                     }
                 }
             }
@@ -35,7 +34,8 @@ const theme = extendTheme({
                     fontSize: "5xl",
                 },
                 "blue": {
-                    color: "brand.dark-blue"
+                    color: "brand.dark-blue",
+                    fontSize: "5xl",
                 },
                 "subheading": {
                     color: "brand.black",
