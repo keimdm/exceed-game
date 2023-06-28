@@ -62,7 +62,15 @@ function LevelOne() {
             else  {
                 response.json().then((data) => {
                     let userScores = data.scores;
-                    userScores.levelOne = Math.round(score * dataRemaining / maxData);
+                    let newScore = Math.round(score * dataRemaining / maxData);
+                    if (userScores.levelOne) {
+                        if (userScores.levelOne < newScore) {
+                            userScores.levelOne = newScore;
+                        }
+                    }
+                    else {
+                        userScores.levelOne = newScore;
+                    }
                     fetch("/api/users/scores/" + userId, {
                         method: "PUT",
                         headers: {
