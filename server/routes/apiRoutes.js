@@ -81,6 +81,13 @@ router.put('/users/scores/:id', (req, res) => {
   .catch((err) => res.status(500).json(err));
 })
 
+// /api/users/settings/:id
+router.put('/users/settings/:id', (req, res) => {
+  models.User.findOneAndUpdate({ _id: req.params.id }, { opsys: req.body.opsys, mode: req.body.mode }, { new: true} )
+  .then((dbUserData) => res.json(dbUserData))
+  .catch((err) => res.status(500).json(err));
+})
+
 // /api/users/:id
 router.delete('/users/:id',  (req, res) => {
     models.User.findOneAndDelete({_id: req.params.id})
