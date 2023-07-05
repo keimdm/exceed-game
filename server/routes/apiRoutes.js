@@ -41,6 +41,7 @@ router.post('/users/', (req, res) => {
 
 // /api/users/login/
 router.post('/users/login/', async (req, res) => {
+    console.log("login route accessed");
     try {
       let { email, password } = req.body;
       email = email.toLowerCase();
