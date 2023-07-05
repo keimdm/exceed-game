@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js",
-    "seed": "node utils/seed.js"
+    "dev": "nodemon server.js",
+    "seed": "node utils/seed.js",
+    "server": "node server.js"
   },
   "keywords": [],
   "author": "",
