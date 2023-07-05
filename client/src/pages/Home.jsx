@@ -38,7 +38,7 @@ function Home() {
                             <Heading
                                 variant="blue"
                             >
-                                Welcome to Exceed!
+                                Welcome to Exceed Test!
                             </Heading>
                         </Box>
                         <Box
