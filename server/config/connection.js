@@ -1,7 +1,9 @@
 import pkg from 'mongoose';
 const { connect, connection } = pkg;
 
-connect('mongodb://127.0.0.1:27017/exceed-game', {
+const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/exceed-game';
+
+connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(
