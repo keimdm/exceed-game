@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Cell from '../components/Cell.jsx'
 import { useState, useEffect, useRef } from 'react';
 import Header from "../components/Header.jsx";
-import { loggedIn } from '../utils/auth';
+import { loggedIn, getUser } from '../utils/auth';
 
 function LevelOne() {
 
@@ -42,6 +42,58 @@ function LevelOne() {
         setCurrent(target);
         setCells(prevCells);
     };
+
+    const updateHighScore = (dataRemaining) => {
+        console.log("ran high score");
+        const user = getUser();
+        const userId = user.data._id;
+        fetch("/api/users/" + userId, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((response) => {
+            if (response.status === 400) {
+                console.log("Try again!");
+            }
+            else if (response.status === 500) {
+                console.log("Server error - please try again later!");
+            }
+            else  {
+                response.json().then((data) => {
+                    let userScores = data.scores;
+                    let newScore = Math.round(score * dataRemaining / maxData);
+                    if (userScores.levelOne) {
+                        if (userScores.levelOne < newScore) {
+                            userScores.levelOne = newScore;
+                        }
+                    }
+                    else {
+                        userScores.levelOne = newScore;
+                    }
+                    fetch("/api/users/scores/" + userId, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            "scores": userScores,
+                        }),
+                    }).then((response) => {
+                        if (response.status === 400) {
+                            console.log("Try again!");
+                        }
+                        else if (response.status === 500) {
+                            console.log("Server error - please try again later!");
+                        }
+                        else  {
+                            console.log("Success!");
+                        }  
+                    });  
+                })
+            }  
+        });  
+    }
 
     const handleKeyDown = (event) => {
         event.preventDefault();
@@ -869,6 +921,8 @@ function LevelOne() {
             console.log(dataRemaining);
             setGameRunning(0);
             setGameOver(1);
+            updateHighScore(dataRemaining);
+            
         }
         timeElapsed.current = Math.round(secondsElapsed);
         if (timesToSpawn.includes(timeElapsed.current)) {

@@ -60,8 +60,7 @@ router.post('/users/login/', async (req, res) => {
       }
 
       const token = signToken(user);
-
-      res.json({ message: `User with name ${user.username} logged in`, token });
+      res.json({ message: `User with name ${user.username} logged in`, token});
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
@@ -73,6 +72,20 @@ router.put('/users/:id', (req, res) => {
     models.User.findOneAndUpdate({ _id: req.params.id }, { username: req.body.username, email: req.body.email }, { new: true} )
     .then((dbUserData) => res.json(dbUserData))
     .catch((err) => res.status(500).json(err));
+})
+
+// /api/users/scores/:id
+router.put('/users/scores/:id', (req, res) => {
+  models.User.findOneAndUpdate({ _id: req.params.id }, { scores: req.body.scores }, { new: true} )
+  .then((dbUserData) => res.json(dbUserData))
+  .catch((err) => res.status(500).json(err));
+})
+
+// /api/users/settings/:id
+router.put('/users/settings/:id', (req, res) => {
+  models.User.findOneAndUpdate({ _id: req.params.id }, { opsys: req.body.opsys, mode: req.body.mode }, { new: true} )
+  .then((dbUserData) => res.json(dbUserData))
+  .catch((err) => res.status(500).json(err));
 })
 
 // /api/users/:id
