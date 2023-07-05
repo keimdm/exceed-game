@@ -10,7 +10,7 @@ env.config();
 
 const app = express();
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-const PORT = process.env.SERVER_PORT;
+const PORT = process.env.PORT || process.env.SERVER_PORT;
 
 app.use(cors());
 app.use(json());
