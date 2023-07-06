@@ -13,7 +13,6 @@ function LevelOneWindows() {
     const [edgeX, setEdgeX] = useState(0);
     const [lastYMove, setLastYMove] = useState(0);
     const [lastXMove, setLastXMove] = useState(0);
-    const [commandPressed, setCommandPressed] = useState(0);
     const [selectMultipleX, setSelectMultipleX] = useState(0);
     const [selectMultipleY, setSelectMultipleY] = useState(0);
     const [counter, setCounter] = useState(0);
@@ -121,7 +120,7 @@ function LevelOneWindows() {
                     for (let l = 0; l < cells.length; l++) {
                         cells[l].status = "None";
                     }
-                    if (commandPressed === 1) {
+                    if (event.ctrlKey) {
                         // set up variables for while loop - starting on the current cell to iterate through until the stopping cell is found
                         let proposedNewCell = edgeY;
                         let canContinue = true;
@@ -278,7 +277,7 @@ function LevelOneWindows() {
                     for (let l = 0; l < cells.length; l++) {
                         cells[l].status = "None";
                     }
-                    if (commandPressed === 1) {
+                    if (event.ctrlKey) {
                         // set up variables for while loop - starting on the current cell to iterate through until the stopping cell is found
                         let proposedNewCell = edgeY;
                         let canContinue = true;
@@ -435,7 +434,7 @@ function LevelOneWindows() {
                     for (let l = 0; l < cells.length; l++) {
                         cells[l].status = "None";
                     }
-                    if (commandPressed === 1) {
+                    if (event.ctrlKey) {
                         // set up variables for while loop - starting on the current cell to iterate through until the stopping cell is found
                         let proposedNewCell = edgeX;
                         let canContinue = true;
@@ -592,7 +591,7 @@ function LevelOneWindows() {
                     for (let l = 0; l < cells.length; l++) {
                         cells[l].status = "None";
                     }
-                    if (commandPressed === 1) {
+                    if (event.ctrlKey) {
                         // set up variables for while loop - starting on the current cell to iterate through until the stopping cell is found
                         let proposedNewCell = edgeX;
                         let canContinue = true;
@@ -744,12 +743,6 @@ function LevelOneWindows() {
                     }
                     setLastXMove(-1);
                 break;
-                case "MetaLeft":
-                    setCommandPressed(1);
-                break;
-                case "MetaRight":
-                    setCommandPressed(1);
-                break;
                 case "Backspace":
                     let newCells = cells.slice(0);
                     let newTempPotential = [];
@@ -781,18 +774,6 @@ function LevelOneWindows() {
                     setTempPotential(newTempPotential);
                 break;
             }
-        }
-    }
-
-    const handleKeyUp = (event) => {
-        const code = event.code;
-        switch (code) {
-            case "MetaLeft":
-                setCommandPressed(0);
-            break;
-            case "MetaRight":
-                setCommandPressed(0);
-            break;
         }
     }
 
