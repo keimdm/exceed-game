@@ -27,7 +27,7 @@ function LevelOneMobile() {
     const [dataLeft, setDataLeft] = useState(0);
     const timeElapsed = useRef(0);
     const incrementForSpawn = 2;
-    const scoreIncrement = 10;
+    const scoreIncrement = 50;
     const maxTime = 15;
     const min = 0;
     const max = 49;
@@ -63,13 +63,13 @@ function LevelOneMobile() {
                 response.json().then((data) => {
                     let userScores = data.scores;
                     let newScore = Math.round(score * dataRemaining / maxData);
-                    if (userScores.levelOne) {
-                        if (userScores.levelOne < newScore) {
-                            userScores.levelOne = newScore;
+                    if (userScores.levelOneMobile) {
+                        if (userScores.levelOneMobile < newScore) {
+                            userScores.levelOneMobile = newScore;
                         }
                     }
                     else {
-                        userScores.levelOne = newScore;
+                        userScores.levelOneMobile = newScore;
                     }
                     fetch("/api/users/scores/" + userId, {
                         method: "PUT",
@@ -278,7 +278,7 @@ function LevelOneMobile() {
     const spawn = () => {
         let newCells = cells.slice(0);
         for (let b = 0; b < permanentPotential.length; b++) {
-            let rand = Math.round(Math.random() * 10);
+            let rand = Math.round(Math.random() * 20);
             if (rand === 1) {
                 let newSquare = permanentPotential[b];
                 newCells[newSquare].contents = "#ERR";
@@ -297,7 +297,7 @@ function LevelOneMobile() {
             }
         }
         for (let c = 0; c < tempPotential.length; c++) {
-            let rand = Math.round(Math.random() * 10);
+            let rand = Math.round(Math.random() * 20);
             if (rand === 1) {
                 let newSquare = tempPotential[c];
                 newCells[newSquare].contents = "#ERR";

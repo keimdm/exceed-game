@@ -10,6 +10,8 @@ function Scores() {
     const [scores, setScores] = useState([]);
     const [levelOneHigh, setLevelOneHigh] = useState(0);
     const [levelOneHolder, setLevelOneHolder] = useState("-");
+    const [levelOneMHigh, setLevelOneMHigh] = useState(0);
+    const [levelOneMHolder, setLevelOneMHolder] = useState("-");
 
     useEffect(() => {
         console.log("use effect");
@@ -51,6 +53,12 @@ function Scores() {
                                         if (data[i].scores.levelOne > levelOneHigh) {
                                             setLevelOneHigh(data[i].scores.levelOne);
                                             setLevelOneHolder(data[i].username)
+                                        }
+                                    }
+                                    if (data[i].scores.levelOneMobile) {
+                                        if (data[i].scores.levelOneMobile > levelOneMHigh) {
+                                            setLevelOneMHigh(data[i].scores.levelOneMobile);
+                                            setLevelOneMHolder(data[i].username)
                                         }
                                     }
                                 }
@@ -103,6 +111,7 @@ function Scores() {
                                     </Heading>
                                     <Heading
                                         variant="subheading"
+                                        my={6}
                                     >
                                         Level One
                                     </Heading>
@@ -164,6 +173,73 @@ function Scores() {
                                                 variant="subheading"
                                             >
                                                 {levelOneHolder}
+                                            </Heading>
+                                        </Box>
+                                    </Box>
+                                    <Heading
+                                        variant="subheading"
+                                        my={6}
+                                    >
+                                        Level One Mobile
+                                    </Heading>
+                                    <Box
+                                        w="100%"
+                                        display="flex"
+                                        flexDirection="row"
+                                        justifyContent="space-between"
+                                    >
+                                        <Box
+                                            w="30%"
+                                            display="flex"
+                                            flexDirection="column"
+                                            alignItems="center"
+                                            textAlign="center"
+                                        >
+                                            <Heading
+                                                variant="subheading"
+                                            >
+                                                Your Score:
+                                            </Heading>
+                                            <Heading
+                                                variant="subheading"
+                                            >
+                                                {scores.levelOneMobile || 0}
+                                            </Heading>
+                                        </Box>
+                                        <Box
+                                            w="30%"
+                                            display="flex"
+                                            flexDirection="column"
+                                            alignItems="center"
+                                            textAlign="center"
+                                        >
+                                            <Heading
+                                                variant="subheading"
+                                            >
+                                                Record:
+                                            </Heading>
+                                            <Heading
+                                                variant="subheading"
+                                            >
+                                                {levelOneMHigh}
+                                            </Heading>
+                                        </Box>
+                                        <Box
+                                            w="30%"
+                                            display="flex"
+                                            flexDirection="column"
+                                            alignItems="center"
+                                            textAlign="center"
+                                        >
+                                            <Heading
+                                                variant="subheading"
+                                            >
+                                                Record Holder:
+                                            </Heading>
+                                            <Heading
+                                                variant="subheading"
+                                            >
+                                                {levelOneMHolder}
                                             </Heading>
                                         </Box>
                                     </Box>
