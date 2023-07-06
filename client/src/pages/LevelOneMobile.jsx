@@ -30,10 +30,10 @@ function LevelOneMobile() {
     const scoreIncrement = 10;
     const maxTime = 15;
     const min = 0;
-    const max = 149;
-    const noCols = 10;
-    const noRows = 15;
-    const permanentPotential = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149];
+    const max = 49;
+    const noCols = 5;
+    const noRows = 10;
+    const permanentPotential = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49];
 
     const editStatus = (current, target, newStatus) => {
         const prevCells = cells.slice(0);
@@ -825,7 +825,7 @@ function LevelOneMobile() {
         const newCells = [];
         setMaxData(0);
         setDataLeft(0);
-        window.location.assign('/level-one');
+        window.location.assign('/level-one-m');
 
         for (let i = 0; i < noCols; i++) {
             for (let j = 0; j < noRows; j++) {
@@ -866,7 +866,7 @@ function LevelOneMobile() {
         for (let i = 0; i < noCols; i++) {
             for (let j = 0; j < noRows; j++) {
                 let contents = "";
-                if (i >= 3 && i <=6 && j >= 3 && j <=7 ) {
+                if (i === 2 && i <=6 && j >= 2 && j <=7 ) {
                     contents = "DATA";
                 }
                 else {
@@ -1022,7 +1022,7 @@ function LevelOneMobile() {
                                 onKeyUp={handleKeyUp}
                             >
                                 <Grid
-                                    w="800px"
+                                    w="300px"
                                     h="500px"
                                     bgColor="brand.gray"
                                     templateColumns={"repeat(" + noCols + ", 1fr)"}
