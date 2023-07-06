@@ -768,11 +768,11 @@ function LevelOne() {
                             if (q - 1 >= min && (q) % noRows !== 0 && !newTempPotential.includes(q - 1)) {
                                 newTempPotential.push(q - 1);
                             }
-                            if (q + 15 <= max && !newTempPotential.includes(q + 15)) {
-                                newTempPotential.push(q + 15);
+                            if (q + noRows <= max && !newTempPotential.includes(q + noRows)) {
+                                newTempPotential.push(q + noRows);
                             }
-                            if (q - 15 >= min && !newTempPotential.includes(q - 15)) {
-                                newTempPotential.push(q - 15);
+                            if (q - noRows >= min && !newTempPotential.includes(q - noRows)) {
+                                newTempPotential.push(q - noRows);
                             }
                         }
                     }
@@ -949,11 +949,11 @@ function LevelOne() {
                 if (newSquare - 1 >= min && (newSquare) % noRows !== 0 && !tempPotential.includes(newSquare - 1)) {
                     tempPotential.push(newSquare - 1);
                 }
-                if (newSquare + 15 <= max && !tempPotential.includes(newSquare + 15)) {
-                    tempPotential.push(newSquare + 15);
+                if (newSquare + noRows <= max && !tempPotential.includes(newSquare + noRows)) {
+                    tempPotential.push(newSquare + noRows);
                 }
-                if (newSquare - 15 >= min && !tempPotential.includes(newSquare - 15)) {
-                    tempPotential.push(newSquare - 15);
+                if (newSquare - noRows >= min && !tempPotential.includes(newSquare - noRows)) {
+                    tempPotential.push(newSquare - noRows);
                 }
             }
         }
@@ -968,11 +968,11 @@ function LevelOne() {
                 if (newSquare - 1 >= min && (newSquare) % noRows !== 0 && !tempPotential.includes(newSquare - 1)) {
                     tempPotential.push(newSquare - 1);
                 }
-                if (newSquare + 15 <= max && !tempPotential.includes(newSquare + 15)) {
-                    tempPotential.push(newSquare + 15);
+                if (newSquare + noRows <= max && !tempPotential.includes(newSquare + noRows)) {
+                    tempPotential.push(newSquare + noRows);
                 }
-                if (newSquare - 15 >= min && !tempPotential.includes(newSquare - 15)) {
-                    tempPotential.push(newSquare - 15);
+                if (newSquare - noRows >= min && !tempPotential.includes(newSquare - noRows)) {
+                    tempPotential.push(newSquare - noRows);
                 }
             }
         }
