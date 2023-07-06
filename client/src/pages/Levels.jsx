@@ -1,9 +1,43 @@
-import { loggedIn } from '../utils/auth';
+import { loggedIn, getUser } from '../utils/auth';
 import { Button, FormControl, FormLabel, Input, Box, Card, Heading } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import Header from "../components/Header.jsx";
+import { useState, useEffect } from "react";
 
 function Levels() {
+
+    const [loading, setLoading] = useState(true);
+    const [levelOneLink, setLevelOneLink] = useState('/level-one');
+
+    useEffect(() => {
+        console.log("use effect");
+        const user = getUser();
+        const userId = user.data._id;
+        fetch("/api/users/" + userId, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((response) => {
+            if (response.status === 400) {
+                console.log("Try again!");
+            }
+            else if (response.status === 500) {
+                console.log("Server error - please try again later!");
+            }
+            else  {
+                response.json().then((data) => {
+                    if (data.mode === "Mobile") {
+                        setLevelOneLink('/level-one-m');
+                    }
+                    else if (data.opsys === "Windows") {
+                        setLevelOneLink('/level-one-w');
+                    }
+                    setLoading(false);
+                })
+            }  
+        });  
+    }, []);
 
     return (
         <>
@@ -28,18 +62,30 @@ function Levels() {
                             alignItems="center"
                             p={10}
                         >   
-                            <Heading
-                                variant="blue"
-                            >
-                                Select a Level:
-                            </Heading>
-                            <Link to={`/level-one`}>
-                                <Button
-                                    variant="brand"
-                                >
-                                    Level 1
-                                </Button>
-                            </Link>
+                            {loading ? (
+                                <>
+                                    <Heading
+                                        variant="subheading"
+                                    >
+                                        Loading...
+                                    </Heading>
+                                </>
+                            ) : (
+                                <>
+                                    <Heading
+                                        variant="blue"
+                                    >
+                                        Select a Level:
+                                    </Heading>
+                                    <Link to={levelOneLink}>
+                                        <Button
+                                            variant="brand"
+                                        >
+                                            Level 1
+                                        </Button>
+                                    </Link>
+                                </>
+                            )}
                         </Card>
                     </>
                 ) : (

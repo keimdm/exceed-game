@@ -11,6 +11,8 @@ import Scores from './pages/Scores.jsx'
 import Account from './pages/Account.jsx'
 import SignUp from './pages/SignUp.jsx'
 import LevelOne from './pages/LevelOne.jsx'
+import LevelOneWindows from './pages/LevelOneWindows.jsx'
+import LevelOneMobile from './pages/LevelOneMobile.jsx'
 
 // Creates the router for the app
 const router = createBrowserRouter([
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
 	{
 		path: "/level-one",
 		element: <LevelOne />,
+	},
+	{
+		path: "/level-one-w",
+		element: <LevelOneWindows />,
+	},
+	{
+		path: "/level-one-m",
+		element: <LevelOneMobile />,
 	},
 ]);
 
