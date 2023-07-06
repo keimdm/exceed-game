@@ -42,8 +42,8 @@ function Levels() {
     return (
         <>
             <Box
-                w="100%"
-                h="100vh"
+                minH={{base: window.innerHeight, md: '100vh'}}
+                w={{base: "100%", md: '100%'}}
                 bgColor="brand.gray"
                 display="flex"
                 flexDirection="column"
@@ -53,7 +53,7 @@ function Levels() {
                 {loggedIn() ? (
                     <>
                         <Card
-                            w="60%"
+                            w={{base: "90%", md: "60%"}}
                             h="50%"
                             my={12}
                             display="flex"
@@ -66,6 +66,7 @@ function Levels() {
                                 <>
                                     <Heading
                                         variant="subheading"
+                                        textAlign="center"
                                     >
                                         Loading...
                                     </Heading>
@@ -74,6 +75,8 @@ function Levels() {
                                 <>
                                     <Heading
                                         variant="blue"
+                                        textAlign="center"
+                                        mb={10}
                                     >
                                         Select a Level:
                                     </Heading>
@@ -91,7 +94,7 @@ function Levels() {
                 ) : (
                     <>
                         <Card
-                            w="60%"
+                            w={{base: "90%", md: "60%"}}
                             h="50%"
                             my={12}
                             display="flex"
@@ -103,6 +106,7 @@ function Levels() {
                         >
                             <Heading
                                 variant="subheading"
+                                textAlign="center"
                             >
                                 Sorry - you are not authorized to view this page! Please log in and try again.
                             </Heading>

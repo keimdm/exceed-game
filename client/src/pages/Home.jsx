@@ -8,8 +8,8 @@ function Home() {
     return (
       <>
         <Box
-            w="100%"
-            h="100vh"
+            minH={{base: window.innerHeight, md: '100vh'}}
+            w={{base: "100%", md: '100%'}}
             bgColor="brand.gray"
             display="flex"
             flexDirection="column"
@@ -19,11 +19,13 @@ function Home() {
             {loggedIn() ? (
                 <>
                     <Card
-                        w="60%"
-                        h="50%"
                         my={12}
                         display="flex"
-                        flexDirection="row"
+                        flexDirection={{base: "column", md: "row"}}
+                        alignItems="center"
+                        minH="50%"
+                        maxW="90%"
+                        pb={10}
                     >
                         <Box
                             w="50%"
@@ -33,12 +35,13 @@ function Home() {
                             justifyContent="center"
                             alignItems="center"
                             textAlign="center"
-                            p={10}
+                            py={10}
+                            px={{base: 5, md: 10}}
                         >
                             <Heading
                                 variant="blue"
                             >
-                                Welcome to Exceed Test!
+                                Welcome to Exceed!
                             </Heading>
                         </Box>
                         <Box
@@ -79,11 +82,13 @@ function Home() {
             ) : (
                 <>
                     <Card
-                        w="60%"
-                        h="50%"
                         my={12}
                         display="flex"
-                        flexDirection="row"
+                        flexDirection={{base: "column", md: "row"}}
+                        alignItems="center"
+                        minH="50%"
+                        maxW="90%"
+                        pb={10}
                     >
                         <Box
                             w="50%"
@@ -93,6 +98,8 @@ function Home() {
                             justifyContent="center"
                             alignItems="center"
                             textAlign="center"
+                            py={10}
+                            px={{base: 5, md: 10}}
                         >
                             <Heading
                                 variant="blue"
@@ -101,17 +108,19 @@ function Home() {
                             </Heading>
                         </Box>
                         <Box
-                            w="50%"
+                            w={{base: "90%", md: "50%"}}
                             h="100%"
                             display="flex"
                             flexDirection="column"
                             justifyContent="space-around"
                             alignItems="center"
                             textAlign="center"
-                            p={10}
+                            px={{base: 5, md: 10}}
+                            my={10}
                         >
                             <Heading
                                 variant="subheading"
+                                my={3}
                             >
                                 Exceed is a spreadsheet training tool that uses a game to teach users how to navigate a spreadsheet efficiently.
                             </Heading>

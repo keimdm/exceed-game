@@ -69,8 +69,8 @@ function Account() {
     return (
         <>
             <Box
-                w="100%"
-                h="100vh"
+                minH={{base: window.innerHeight, md: '100vh'}}
+                w={{base: "100%", md: '100%'}}
                 bgColor="brand.gray"
                 display="flex"
                 flexDirection="column"
@@ -80,8 +80,8 @@ function Account() {
                 {loggedIn() ? (
                     <>
                         <Card
-                            w="60%"
-                            h="70%"
+                            w={{base: "90%", md: "60%"}}
+                            minH="70%"
                             my={12}
                             display="flex"
                             flexDirection="column"
@@ -93,6 +93,7 @@ function Account() {
                                 <>
                                     <Heading
                                         variant="subheading"
+                                        textAlign="center"
                                     >
                                         Loading...
                                     </Heading>
@@ -101,6 +102,8 @@ function Account() {
                                 <>
                                     <Heading
                                         variant="blue"
+                                        textAlign="center"
+                                        mb={10}
                                     >
                                         Account Settings
                                     </Heading>
@@ -133,6 +136,7 @@ function Account() {
                                         display="flex"
                                         flexDirection="column"
                                         alignItems="center"
+                                        mb={10}
                                     >
                                         <Heading
                                             variant="subheading"
@@ -156,7 +160,7 @@ function Account() {
                                     </Box>
                                     <Button
                                         variant="brand"
-                                        w="30%"
+                                        w={{base: "60%", md: "30%"}}
                                         onClick={updateAccount}
                                     >
                                         Submit Update
@@ -169,7 +173,7 @@ function Account() {
                 ) : (
                     <>
                         <Card
-                            w="60%"
+                            w={{base: "90%", md: "60%"}}
                             h="50%"
                             my={12}
                             display="flex"
@@ -181,6 +185,7 @@ function Account() {
                         >
                             <Heading
                                 variant="subheading"
+                                textAlign="center"
                             >
                                 Sorry - you are not authorized to view this page! Please log in and try again.
                             </Heading>

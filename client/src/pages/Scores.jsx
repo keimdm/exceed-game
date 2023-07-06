@@ -74,8 +74,8 @@ function Scores() {
     return (
         <>
             <Box
-                w="100%"
-                h="100vh"
+                minH={{base: window.innerHeight, md: '100vh'}}
+                w={{base: "100%", md: '100%'}}
                 bgColor="brand.gray"
                 display="flex"
                 flexDirection="column"
@@ -85,7 +85,7 @@ function Scores() {
                 {loggedIn() ? (
                     <>
                         <Card
-                            w="60%"
+                            w={{base: "90%", md: "60%"}}
                             h="50%"
                             my={12}
                             display="flex"
@@ -98,6 +98,7 @@ function Scores() {
                                 <>
                                     <Heading
                                         variant="subheading"
+                                        textAlign="center"
                                     >
                                         Loading...
                                     </Heading>
@@ -106,6 +107,8 @@ function Scores() {
                                 <>
                                     <Heading
                                         variant="blue"
+                                        textAlign="center"
+                                        mb={10}
                                     >
                                         High Scores
                                     </Heading>
@@ -250,7 +253,7 @@ function Scores() {
                 ) : (
                     <>
                         <Card
-                            w="60%"
+                            w={{base: "90%", md: "60%"}}
                             h="50%"
                             my={12}
                             display="flex"
@@ -262,6 +265,7 @@ function Scores() {
                         >
                             <Heading
                                 variant="subheading"
+                                textAlign="center"
                             >
                                 Sorry - you are not authorized to view this page! Please log in and try again.
                             </Heading>

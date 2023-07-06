@@ -320,8 +320,8 @@ function LevelOneMobile() {
 
     return (
         <Box
-            w="100%"
-            h="100vh"
+            minH={{base: window.innerHeight, md: '100vh'}}
+            w={{base: "100%", md: '100%'}}
             bgColor="brand.gray"
             display="flex"
             flexDirection="column"
@@ -331,6 +331,9 @@ function LevelOneMobile() {
             {loggedIn() ? (
                 <Box
                     onMouseDown={handleClicks}
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
                 >
                     {gameRunning === 1 ? (
                         <>
@@ -338,6 +341,7 @@ function LevelOneMobile() {
                                 variant="subheading"
                                 textAlign="center"
                                 mb={3}
+                                mt={3}
                             >
                                 {"Time: " + (maxTime - timeElapsed.current < 0 ? 0 : maxTime - timeElapsed.current)}
                             </Heading>
@@ -375,12 +379,15 @@ function LevelOneMobile() {
                         </>
                     ) : (
                         gameOver === 1 ? (
-                            <>
                                 <div
                                     tabIndex={-1}
+                                    w="100%"
+                                    display="flex"
+                                    flexDirection="column"
+                                    alignItems="center"
                                 >
                                     <Card
-                                        w="800px"
+                                        w={{base: "100%", md: "800px"}}
                                         h="500px"
                                         my={12}
                                         display="flex"
@@ -389,15 +396,15 @@ function LevelOneMobile() {
                                         alignItems="center"
                                         p={10}
                                     >
-                                        <Heading variant="blue">Game Over!</Heading>
+                                        <Heading variant="blue" textAlign="center">Game Over!</Heading>
                                         <Box>
-                                            <Heading variant="subheading" mb={2}>{"Raw Score: " + score}</Heading>
-                                            <Heading variant="subheading" mb={2}>{"Data Remaining: " + Math.round(dataLeft * 100 / maxData) + "%"}</Heading>
-                                            <Heading variant="subheading" mb={2}>{"Final Score: " + Math.round(score * dataLeft / maxData)}</Heading>
+                                            <Heading variant="subheading" mb={2} textAlign="center">{"Raw Score: " + score}</Heading>
+                                            <Heading variant="subheading" mb={2} textAlign="center">{"Data Remaining: " + Math.round(dataLeft * 100 / maxData) + "%"}</Heading>
+                                            <Heading variant="subheading" mb={2} textAlign="center">{"Final Score: " + Math.round(score * dataLeft / maxData)}</Heading>
                                         </Box>
                                         
                                         <Box
-                                            w="30%"
+                                            w={{base: "60%", md: "30%"}}
                                         >
                                             <Button variant="brand" onClick={handlePlayAgain} mb={3}>Play Again</Button>
                                             <Link to={`/scores`}>
@@ -406,14 +413,16 @@ function LevelOneMobile() {
                                         </Box>
                                     </Card>
                                 </div>
-                            </>
                         ) : (
-                            <>
                                 <div
                                     tabIndex={-1}
+                                    w="100%"
+                                    display="flex"
+                                    flexDirection="column"
+                                    alignItems="center"
                                 >
                                     <Card
-                                        w="800px"
+                                        w={{base: "100%", md: "800px"}}
                                         h="500px"
                                         my={12}
                                         display="flex"
@@ -421,9 +430,11 @@ function LevelOneMobile() {
                                         justifyContent="space-around"
                                         alignItems="center"
                                         p={10}
+                                        alignSelf="center"
                                     >
                                         <Heading
                                             variant="blue"
+                                            textAlign="center"
                                         >
                                             Level 1
                                         </Heading>
@@ -434,7 +445,6 @@ function LevelOneMobile() {
                                         </Heading>
                                     </Card>
                                 </div>
-                            </>
                         )
                         
                     )}
@@ -442,7 +452,7 @@ function LevelOneMobile() {
             ) : (
                 <>
                     <Card
-                        w="60%"
+                        w={{base: "90%", md: "60%"}}
                         h="50%"
                         my={12}
                         display="flex"
@@ -454,6 +464,7 @@ function LevelOneMobile() {
                     >
                         <Heading
                             variant="subheading"
+                            textAlign="center"
                         >
                             Sorry - you are not authorized to view this page! Please log in and try again.
                         </Heading>

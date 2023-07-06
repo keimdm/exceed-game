@@ -59,8 +59,8 @@ function SignUp() {
     return (
       <>
         <Box
-            w="100%"
-            h="100vh"
+            minH={{base: window.innerHeight, md: '100vh'}}
+            w={{base: "100%", md: '100%'}}
             bgColor="brand.gray"
             display="flex"
             flexDirection="column"
@@ -68,7 +68,7 @@ function SignUp() {
         >
             <Header />
             <Card
-                w="60%"
+                w={{base: "90%", md: "60%"}}
                 h="80%"
                 my={12}
                 display="flex"
@@ -79,6 +79,8 @@ function SignUp() {
             >
                 <Heading
                     variant="blue"
+                    textAlign="center"
+                    mb={10}
                 >
                     Sign Up
                 </Heading>
@@ -95,7 +97,8 @@ function SignUp() {
                 <Button
                     onClick={signIn}
                     variant="brand"
-                    w="20%"
+                    w={{base: "30%", md: "20%"}}
+                    mt={10}
                 >
                     Submit
                 </Button>

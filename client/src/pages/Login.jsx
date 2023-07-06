@@ -49,8 +49,8 @@ function Login() {
     return (
       <>
         <Box
-            w="100%"
-            h="100vh"
+            minH={{base: window.innerHeight, md: '100vh'}}
+            w={{base: "100%", md: '100%'}}
             bgColor="brand.gray"
             display="flex"
             flexDirection="column"
@@ -60,7 +60,7 @@ function Login() {
             {loggedIn() ? (
                 <>
                     <Card
-                        w="60%"
+                        w={{base: "90%", md: "60%"}}
                         h="50%"
                         my={12}
                         display="flex"
@@ -72,6 +72,7 @@ function Login() {
                     >
                         <Heading
                             variant="subheading"
+                            textAlign="center"
                         >
                             You are already logged in!
                         </Heading>
@@ -80,7 +81,7 @@ function Login() {
             ) : (
                 <>
                     <Card
-                        w="60%"
+                        w={{base: "90%", md: "60%"}}
                         h="50%"
                         my={12}
                         display="flex"
@@ -91,6 +92,8 @@ function Login() {
                     >
                         <Heading
                             variant="blue"
+                            textAlign="center"
+                            mb={10}
                         >
                             Log In
                         </Heading>
@@ -103,7 +106,8 @@ function Login() {
                         <Button
                             onClick={signIn}
                             variant="brand"
-                            w="20%"
+                            w={{base: "30%", md: "20%"}}
+                            mt={10}
                         >
                             Log In
                         </Button>

@@ -11,8 +11,8 @@ function Header() {
 	return (
 		<>
 			<Box
-				w="100%"
-				h="50px"
+				minH={"50px"}
+                w={{base: "100%", md: '100%'}}
 				bgColor="brand.dark-blue"
 				display="flex"
 				flexDirection="row"
