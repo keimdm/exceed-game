@@ -825,7 +825,7 @@ function LevelOne() {
         const newCells = [];
         setMaxData(0);
         setDataLeft(0);
-        window.location.assign('/level-one');
+        window.location.reload();
 
         for (let i = 0; i < noCols; i++) {
             for (let j = 0; j < noRows; j++) {
