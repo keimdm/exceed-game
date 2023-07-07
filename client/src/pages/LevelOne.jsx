@@ -860,7 +860,6 @@ function LevelOne() {
         newCells[current].status = "Selected";
 
         setCells(newCells);
-        window.location.reload();
     }
 
     useEffect(() => {
@@ -1065,7 +1064,9 @@ function LevelOne() {
                                         <Box
                                             w="30%"
                                         >
-                                            <Button variant="brand" onClick={handlePlayAgain} mb={3}>Play Again</Button>
+                                            <Link to={`/level-one`}>
+                                                <Button variant="brand" mb={3}>Play Again</Button>
+                                            </Link>
                                             <Link to={`/scores`}>
                                                 <Button variant="brand">High Scores</Button>
                                             </Link>
