@@ -1064,8 +1064,8 @@ function LevelOne() {
                                         <Box
                                             w="30%"
                                         >
-                                            <Link to={`/level-one`}>
-                                                <Button variant="brand" mb={3}>Play Again</Button>
+                                            <Link to={`/levels`}>
+                                                <Button variant="brand" mb={3}>Select a Level</Button>
                                             </Link>
                                             <Link to={`/scores`}>
                                                 <Button variant="brand">High Scores</Button>
