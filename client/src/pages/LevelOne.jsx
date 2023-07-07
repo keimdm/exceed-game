@@ -217,35 +217,35 @@ function LevelOne() {
                     }
                     // if command is not pressed, just iterates by one cell
                     else {
-                        if (max >= current + 1 && (current + 1) % noRows !== 0) {
-                            if (event.shiftKey) {
-                                let newValueY = selectMultipleY + 1;
-                                setSelectMultipleY(newValueY);
-                                // if y width is not zero, loop through y then x
-                                if (newValueY !== 0) {
-                                    for (let k = 0; (newValueY >= 0? k < newValueY: k > newValueY); (newValueY >= 0 ? k++ : k--)) {
-                                        // if x is zero, fill in the cell here since the inner loop won't be reached
-                                        if (selectMultipleX === 0) {
-                                            cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
-                                        }
-                                        for (let m = 0; (selectMultipleX >= 0? m < selectMultipleX: m > selectMultipleX); (selectMultipleX >= 0 ? m++ : m--)) {
-                                            cells[current + (newValueY >= 0 ? k + 1 : k - 1) + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
-                                            cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
-                                            cells[current + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
-                                        }
+                        if (event.shiftKey) {
+                            let newValueY = selectMultipleY + 1;
+                            setSelectMultipleY(newValueY);
+                            // if y width is not zero, loop through y then x
+                            if (newValueY !== 0) {
+                                for (let k = 0; (newValueY >= 0? k < newValueY: k > newValueY); (newValueY >= 0 ? k++ : k--)) {
+                                    // if x is zero, fill in the cell here since the inner loop won't be reached
+                                    if (selectMultipleX === 0) {
+                                        cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
                                     }
-                                }
-                                else {
-                                    // loop through x if y = 0 as the other loop won't be reached
                                     for (let m = 0; (selectMultipleX >= 0? m < selectMultipleX: m > selectMultipleX); (selectMultipleX >= 0 ? m++ : m--)) {
+                                        cells[current + (newValueY >= 0 ? k + 1 : k - 1) + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
+                                        cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
                                         cells[current + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
                                     }
                                 }
-                                editStatus(current, current, "Selected");
-                                setEdgeY(current);
-                                setEdgeX(current);
                             }
                             else {
+                                // loop through x if y = 0 as the other loop won't be reached
+                                for (let m = 0; (selectMultipleX >= 0? m < selectMultipleX: m > selectMultipleX); (selectMultipleX >= 0 ? m++ : m--)) {
+                                    cells[current + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
+                                }
+                            }
+                            editStatus(current, current, "Selected");
+                            setEdgeY(current);
+                            setEdgeX(current);
+                        }
+                        else {
+                            if (max >= current + 1 && (current + 1) % noRows !== 0) {
                                 let newCurrent = current + 1;
                                 editStatus(current, newCurrent, "Selected")
                                 setEdgeY(newCurrent);
@@ -257,21 +257,20 @@ function LevelOne() {
                                 }
                                 setSelectMultipleY(0);
                                 setSelectMultipleX(0);
-
                             }
-                        }
-                        else {
-                            editStatus(current, current, "Selected");
-                            setEdgeY(current);
-                            setEdgeX(current);
-                            for (let l = 0; l < cells.length; l++) {
-                                    if (l !== current) {
-                                        cells[l].status = "None";
+                            else {
+                                editStatus(current, current, "Selected");
+                                setEdgeY(current);
+                                setEdgeX(current);
+                                for (let l = 0; l < cells.length; l++) {
+                                        if (l !== current) {
+                                            cells[l].status = "None";
+                                        }
                                     }
-                                }
-                            setSelectMultipleY(0);
-                            setSelectMultipleX(0);
-                        }
+                                setSelectMultipleY(0);
+                                setSelectMultipleX(0);
+                            }
+                        }    
                     }
                     setLastYMove(1);
                 break;
@@ -374,35 +373,35 @@ function LevelOne() {
                     }
                     // if command is not pressed, just iterates by one cell
                     else {
-                        if (min <= current - 1 && current % noRows !== 0) {
-                            if (event.shiftKey) {
-                                let newValueY = selectMultipleY - 1;
-                                setSelectMultipleY(newValueY);
-                                // if y width is not zero, loop through y then x
-                                if (newValueY !== 0) {
-                                    for (let k = 0; (newValueY >= 0? k < newValueY: k > newValueY); (newValueY >= 0 ? k++ : k--)) {
-                                        // if x is zero, fill in the cell here since the inner loop won't be reached
-                                        if (selectMultipleX === 0) {
-                                            cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
-                                        }
-                                        for (let m = 0; (selectMultipleX >= 0? m < selectMultipleX: m > selectMultipleX); (selectMultipleX >= 0 ? m++ : m--)) {
-                                            cells[current + (newValueY >= 0 ? k + 1 : k - 1) + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
-                                            cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
-                                            cells[current + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
-                                        }
+                        if (event.shiftKey) {
+                            let newValueY = selectMultipleY - 1;
+                            setSelectMultipleY(newValueY);
+                            // if y width is not zero, loop through y then x
+                            if (newValueY !== 0) {
+                                for (let k = 0; (newValueY >= 0? k < newValueY: k > newValueY); (newValueY >= 0 ? k++ : k--)) {
+                                    // if x is zero, fill in the cell here since the inner loop won't be reached
+                                    if (selectMultipleX === 0) {
+                                        cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
                                     }
-                                }
-                                else {
-                                    // loop through x if y = 0 as the other loop won't be reached
                                     for (let m = 0; (selectMultipleX >= 0? m < selectMultipleX: m > selectMultipleX); (selectMultipleX >= 0 ? m++ : m--)) {
+                                        cells[current + (newValueY >= 0 ? k + 1 : k - 1) + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
+                                        cells[current + (newValueY >= 0 ? k + 1 : k - 1)].status = "Selected";
                                         cells[current + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
                                     }
                                 }
-                                editStatus(current, current, "Selected");
-                                setEdgeY(current);
-                                setEdgeX(current);
                             }
                             else {
+                                // loop through x if y = 0 as the other loop won't be reached
+                                for (let m = 0; (selectMultipleX >= 0? m < selectMultipleX: m > selectMultipleX); (selectMultipleX >= 0 ? m++ : m--)) {
+                                    cells[current + (selectMultipleX >= 0 ? m + 1 : m - 1) * noRows].status = "Selected";
+                                }
+                            }
+                            editStatus(current, current, "Selected");
+                            setEdgeY(current);
+                            setEdgeX(current);
+                        }
+                        else {
+                            if (min <= current - 1 && current % noRows !== 0) {
                                 let newCurrent = current - 1;
                                 editStatus(current, newCurrent, "Selected")
                                 setEdgeY(newCurrent);
@@ -414,20 +413,19 @@ function LevelOne() {
                                 }
                                 setSelectMultipleY(0);
                                 setSelectMultipleX(0);
-
                             }
-                        }
-                        else {
-                            editStatus(current, current, "Selected");
-                            setEdgeY(current);
-                            setEdgeX(current);
-                            for (let l = 0; l < cells.length; l++) {
-                                    if (l !== current) {
-                                        cells[l].status = "None";
+                            else {
+                                editStatus(current, current, "Selected");
+                                setEdgeY(current);
+                                setEdgeX(current);
+                                for (let l = 0; l < cells.length; l++) {
+                                        if (l !== current) {
+                                            cells[l].status = "None";
+                                        }
                                     }
-                                }
-                            setSelectMultipleY(0);
-                            setSelectMultipleX(0);
+                                setSelectMultipleY(0);
+                                setSelectMultipleX(0);
+                            }
                         }
                     }
                     setLastYMove(-1);
@@ -531,35 +529,35 @@ function LevelOne() {
                     }
                     // if command is not pressed, just iterates by one cell
                     else {
-                        if (max >= current + noRows) {
-                            if (event.shiftKey) {
-                                let newValueX = selectMultipleX + 1;
-                                setSelectMultipleX(newValueX);
-                                // if x width is not zero, loop through x then y
-                                if (newValueX !== 0) {
-                                    for (let k = 0; (newValueX >= 0? k < newValueX: k > newValueX); (newValueX >= 0 ? k++ : k--)) {
-                                        // if y is zero, fill in the cell here since the inner loop won't be reached
-                                        if (selectMultipleY === 0) {
-                                            cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
-                                        }
-                                        for (let m = 0; (selectMultipleY >= 0? m < selectMultipleY: m > selectMultipleY); (selectMultipleY >= 0 ? m++ : m--)) {
-                                            cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
-                                            cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
-                                            cells[current + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
-                                        }
+                        if (event.shiftKey) {
+                            let newValueX = selectMultipleX + 1;
+                            setSelectMultipleX(newValueX);
+                            // if x width is not zero, loop through x then y
+                            if (newValueX !== 0) {
+                                for (let k = 0; (newValueX >= 0? k < newValueX: k > newValueX); (newValueX >= 0 ? k++ : k--)) {
+                                    // if y is zero, fill in the cell here since the inner loop won't be reached
+                                    if (selectMultipleY === 0) {
+                                        cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
                                     }
-                                }
-                                else {
-                                    // loop through y if x = 0 as the other loop won't be reached
                                     for (let m = 0; (selectMultipleY >= 0? m < selectMultipleY: m > selectMultipleY); (selectMultipleY >= 0 ? m++ : m--)) {
+                                        cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
+                                        cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
                                         cells[current + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
                                     }
                                 }
-                                editStatus(current, current, "Selected");
-                                setEdgeY(current);
-                                setEdgeX(current);
                             }
                             else {
+                                // loop through y if x = 0 as the other loop won't be reached
+                                for (let m = 0; (selectMultipleY >= 0? m < selectMultipleY: m > selectMultipleY); (selectMultipleY >= 0 ? m++ : m--)) {
+                                    cells[current + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
+                                }
+                            }
+                            editStatus(current, current, "Selected");
+                            setEdgeY(current);
+                            setEdgeX(current);
+                        }
+                        else {
+                            if (max >= current + noRows) {
                                 let newCurrent = current + noRows;
                                 editStatus(current, newCurrent, "Selected")
                                 setEdgeY(newCurrent);
@@ -571,20 +569,19 @@ function LevelOne() {
                                 }
                                 setSelectMultipleY(0);
                                 setSelectMultipleX(0);
-
                             }
-                        }
-                        else {
-                            editStatus(current, current, "Selected");
-                            setEdgeY(current);
-                            setEdgeX(current);
-                            for (let l = 0; l < cells.length; l++) {
-                                    if (l !== current) {
-                                        cells[l].status = "None";
+                            else {
+                                editStatus(current, current, "Selected");
+                                setEdgeY(current);
+                                setEdgeX(current);
+                                for (let l = 0; l < cells.length; l++) {
+                                        if (l !== current) {
+                                            cells[l].status = "None";
+                                        }
                                     }
-                                }
-                            setSelectMultipleY(0);
-                            setSelectMultipleX(0);
+                                setSelectMultipleY(0);
+                                setSelectMultipleX(0);
+                            }
                         }
                     }
                     setLastXMove(1);
@@ -688,35 +685,35 @@ function LevelOne() {
                     }
                     // if command is not pressed, just iterates by one cell
                     else {
-                        if (min <= current - noRows) {
-                            if (event.shiftKey) {
-                                let newValueX = selectMultipleX - 1;
-                                setSelectMultipleX(newValueX);
-                                // if x width is not zero, loop through x then y
-                                if (newValueX !== 0) {
-                                    for (let k = 0; (newValueX >= 0? k < newValueX: k > newValueX); (newValueX >= 0 ? k++ : k--)) {
-                                        // if y is zero, fill in the cell here since the inner loop won't be reached
-                                        if (selectMultipleY === 0) {
-                                            cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
-                                        }
-                                        for (let m = 0; (selectMultipleY >= 0? m < selectMultipleY: m > selectMultipleY); (selectMultipleY >= 0 ? m++ : m--)) {
-                                            cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
-                                            cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
-                                            cells[current + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
-                                        }
+                        if (event.shiftKey) {
+                            let newValueX = selectMultipleX - 1;
+                            setSelectMultipleX(newValueX);
+                            // if x width is not zero, loop through x then y
+                            if (newValueX !== 0) {
+                                for (let k = 0; (newValueX >= 0? k < newValueX: k > newValueX); (newValueX >= 0 ? k++ : k--)) {
+                                    // if y is zero, fill in the cell here since the inner loop won't be reached
+                                    if (selectMultipleY === 0) {
+                                        cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
                                     }
-                                }
-                                else {
-                                    // loop through y if x = 0 as the other loop won't be reached
                                     for (let m = 0; (selectMultipleY >= 0? m < selectMultipleY: m > selectMultipleY); (selectMultipleY >= 0 ? m++ : m--)) {
+                                        cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
+                                        cells[current + (newValueX >= 0 ? k + 1 : k - 1) * noRows].status = "Selected";
                                         cells[current + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
                                     }
                                 }
-                                editStatus(current, current, "Selected");
-                                setEdgeY(current);
-                                setEdgeX(current);
                             }
                             else {
+                                // loop through y if x = 0 as the other loop won't be reached
+                                for (let m = 0; (selectMultipleY >= 0? m < selectMultipleY: m > selectMultipleY); (selectMultipleY >= 0 ? m++ : m--)) {
+                                    cells[current + (selectMultipleY >= 0 ? m + 1 : m - 1)].status = "Selected";
+                                }
+                            }
+                            editStatus(current, current, "Selected");
+                            setEdgeY(current);
+                            setEdgeX(current);
+                        }
+                        else {
+                            if (min <= current - noRows) {
                                 let newCurrent = current - noRows;
                                 editStatus(current, newCurrent, "Selected")
                                 setEdgeY(newCurrent);
@@ -728,20 +725,19 @@ function LevelOne() {
                                 }
                                 setSelectMultipleY(0);
                                 setSelectMultipleX(0);
-
                             }
-                        }
-                        else {
-                            editStatus(current, current, "Selected");
-                            setEdgeY(current);
-                            setEdgeX(current);
-                            for (let l = 0; l < cells.length; l++) {
-                                    if (l !== current) {
-                                        cells[l].status = "None";
+                            else {
+                                editStatus(current, current, "Selected");
+                                setEdgeY(current);
+                                setEdgeX(current);
+                                for (let l = 0; l < cells.length; l++) {
+                                        if (l !== current) {
+                                            cells[l].status = "None";
+                                        }
                                     }
-                                }
-                            setSelectMultipleY(0);
-                            setSelectMultipleX(0);
+                                setSelectMultipleY(0);
+                                setSelectMultipleX(0);
+                            }
                         }
                     }
                     setLastXMove(-1);
