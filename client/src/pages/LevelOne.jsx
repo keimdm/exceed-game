@@ -98,6 +98,8 @@ function LevelOne() {
     const handleKeyDown = (event) => {
         event.preventDefault();
         console.log(event);
+        console.log(gameRunning);
+        console.log(gameOver);
         if (gameRunning === 0 && gameOver === 0) {
             setStartTime(Date.now());
             setGameRunning(1);
@@ -825,7 +827,7 @@ function LevelOne() {
         const newCells = [];
         setMaxData(0);
         setDataLeft(0);
-        window.location.reload();
+        
 
         for (let i = 0; i < noCols; i++) {
             for (let j = 0; j < noRows; j++) {
@@ -858,6 +860,7 @@ function LevelOne() {
         newCells[current].status = "Selected";
 
         setCells(newCells);
+        window.location.reload();
     }
 
     useEffect(() => {
