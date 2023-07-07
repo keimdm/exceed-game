@@ -144,61 +144,6 @@ function LevelOneMobile() {
         }
     }
 
-    const handlePlayAgain = (event) => {
-        setGameRunning(0);
-        setGameOver(0);
-        timeElapsed.current = 0;
-        setCurrent(0);
-        setEdgeY(0);
-        setEdgeX(0);
-        setLastYMove(0);
-        setLastXMove(0);
-        setCommandPressed(0);
-        setSelectMultipleX(0);
-        setSelectMultipleY(0);
-        setCounter(0);
-        setStartTime(0);
-        setTimesToSpawn([]);
-        setTempPotential([])
-        setScore(0);
-        const newCells = [];
-        setMaxData(0);
-        setDataLeft(0);
-        window.location.reload();
-
-        for (let i = 0; i < noCols; i++) {
-            for (let j = 0; j < noRows; j++) {
-                let contents = "";
-                if (i >= 3 && i <=6 && j >= 3 && j <=7 ) {
-                    contents = "DATA";
-                }
-                else {
-                    contents = "";
-                }
-                newCells.push({
-                    colStart: i + 1,
-                    colEnd: i + 2,
-                    rowStart: j + 1,
-                    rowEnd: j + 2,
-                    contents: contents,
-                    status: "None"
-                });
-            }
-        }
-
-        let newSpawnTimes = [];
-        for (let k = 0; k < maxTime; k++) {
-            if (k % incrementForSpawn === 0) {
-                newSpawnTimes.push(k);
-            }
-        }
-        setTimesToSpawn(newSpawnTimes);
-
-        newCells[current].status = "Selected";
-
-        setCells(newCells);
-    }
-
     useEffect(() => {
         const newCells = [];
 
@@ -406,7 +351,9 @@ function LevelOneMobile() {
                                         <Box
                                             w={{base: "60%", md: "30%"}}
                                         >
-                                            <Button variant="brand" onClick={handlePlayAgain} mb={3}>Play Again</Button>
+                                            <Link to={`/levels`}>
+                                                <Button variant="brand" mb={3}>Select a Level</Button>
+                                            </Link>
                                             <Link to={`/scores`}>
                                                 <Button variant="brand">High Scores</Button>
                                             </Link>
