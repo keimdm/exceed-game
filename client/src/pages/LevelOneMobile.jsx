@@ -28,7 +28,7 @@ function LevelOneMobile() {
     const timeElapsed = useRef(0);
     const incrementForSpawn = 2;
     const scoreIncrement = 50;
-    const maxTime = 15;
+    const maxTime = 30;
     const min = 0;
     const max = 49;
     const noCols = 5;
