@@ -48,20 +48,28 @@ function Scores() {
                         else  {
                             response.json().then((data) => {
                                 console.log(data);
+                                let levelOneHighTemp = 0;
+                                let levelOneHolderTemp = "-";
+                                let levelOneMHighTemp = 0;
+                                let levelOneMHolderTemp = "-";
                                 for (let i = 0; i < data.length; i++) {
                                     if (data[i].scores.levelOne) {
-                                        if (data[i].scores.levelOne > levelOneHigh) {
-                                            setLevelOneHigh(data[i].scores.levelOne);
-                                            setLevelOneHolder(data[i].username)
+                                        if (data[i].scores.levelOne > levelOneHighTemp) {
+                                            levelOneHighTemp = data[i].scores.levelOne;
+                                            levelOneHolderTemp = data[i].username;
                                         }
                                     }
                                     if (data[i].scores.levelOneMobile) {
-                                        if (data[i].scores.levelOneMobile > levelOneMHigh) {
-                                            setLevelOneMHigh(data[i].scores.levelOneMobile);
-                                            setLevelOneMHolder(data[i].username)
+                                        if (data[i].scores.levelOneMobile > levelOneMHighTemp) {
+                                            levelOneMHighTemp = data[i].scores.levelOneMobile;
+                                            levelOneMHolderTemp = data[i].username;
                                         }
                                     }
                                 }
+                                setLevelOneHigh(levelOneHighTemp);
+                                setLevelOneHolder(levelOneHolderTemp);
+                                setLevelOneMHigh(levelOneMHighTemp);
+                                setLevelOneMHolder(levelOneMHolderTemp);
                                 setLoading(false);
                             })
                         }  
