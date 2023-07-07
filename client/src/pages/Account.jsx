@@ -1,5 +1,5 @@
 import { loggedIn, getUser } from '../utils/auth';
-import { Button, FormControl, FormLabel, Input, Box, Card, Heading, RadioGroup, Radio, Stack } from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, Input, Box, Card, Heading, RadioGroup, Radio, Stack, Text } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import Header from "../components/Header.jsx";
 import { useState, useEffect } from "react";
@@ -9,6 +9,7 @@ function Account() {
     const [loading, setLoading] = useState(true);
     const [controls, setControls] = useState("Desktop");
     const [system, setSystem] = useState("Mac");
+    const [message, setMessage] = useState("")
 
     useEffect(() => {
         console.log("use effect");
@@ -56,12 +57,15 @@ function Account() {
         }).then((response) => {
             if (response.status === 400) {
                 console.log("Try again!");
+                setMessage("Try again!");
             }
             else if (response.status === 500) {
                 console.log("Server error - please try again later!");
+                setMessage("Server error - please try again later!");
             }
             else  {
                 console.log("Success!");
+                setMessage("Your account has successfully been updated!");
             }  
         });  
     }
@@ -162,9 +166,11 @@ function Account() {
                                         variant="brand"
                                         w={{base: "60%", md: "30%"}}
                                         onClick={updateAccount}
+                                        my={10}
                                     >
                                         Submit Update
                                     </Button>
+                                    <Text>{message}</Text>
                                 </>
                             )}
                             

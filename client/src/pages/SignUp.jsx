@@ -1,5 +1,5 @@
 import { loggedIn, login } from '../utils/auth';
-import { Button, FormControl, FormLabel, Input, Box, Card, Heading } from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, Input, Box, Card, Heading, Text } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import Header from "../components/Header.jsx";
@@ -10,6 +10,7 @@ function SignUp() {
     const [passwordInput, setPasswordInput] = useState("");
     const [confirmInput, setConfirmInput] = useState("");
     const [usernameInput, setUsernameInput] = useState("");
+    const [message, setMessage] = useState("");
     
     const signIn = async () => {
         // use test4@test.com, password as test login
@@ -18,26 +19,40 @@ function SignUp() {
         console.log(emailInput);
         console.log(passwordInput);
         console.log(confirmInput);
-        const response = await fetch("/api/users/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                "username": usernameInput,
-                "email": emailInput,
-                "password": passwordInput
-            }),
-        });
-        if (response.status === 400) {
-            console.log("Try again!");
+        if (passwordInput === confirmInput) {
+            const response = await fetch("/api/users/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "username": usernameInput,
+                    "email": emailInput,
+                    "password": passwordInput
+                }),
+            });
+            if (response.status === 400) {
+                console.log("Try again!");
+                setMessage("Account creation failed - please try again!");
+            }
+            else if (response.status === 500) {
+                console.log("Server error - please try again later!");
+                setMessage("Server error - please try again later!");
+            }
+            else  {
+                console.log("Account successfully created!");
+                setMessage("Account successfully created!");
+            }
+            setEmailInput("");
+            setPasswordInput("");
+            setConfirmInput("");
+            setUsernameInput("");
         }
-        else if (response.status === 500) {
-            console.log("Server error - please try again later!");
+        else {
+            console.log("Passwords must match - please try again!");
+            setMessage("Passwords must match - please try again!");
         }
-        else  {
-            console.log("Account successfully created!");
-        }  
+          
     }
 
     const updateEmail = async (event) => {
@@ -86,22 +101,23 @@ function SignUp() {
                 </Heading>
                 <FormControl>
                 <FormLabel>Username</FormLabel>
-                <Input placeholder='Username' onChange={updateUsername} mb={3}/>
+                <Input value={usernameInput} placeholder='Username' onChange={updateUsername} mb={3}/>
                 <FormLabel>Email</FormLabel>
-                <Input placeholder='Email' onChange={updateEmail} mb={3}/>
+                <Input value={emailInput} placeholder='Email' onChange={updateEmail} mb={3}/>
                 <FormLabel>Password</FormLabel>
-                <Input placeholder='Password' onChange={updatePassword} mb={3}/>
+                <Input type='password' value={passwordInput} placeholder='Password' onChange={updatePassword} mb={3}/>
                 <FormLabel>Confirm Password</FormLabel>
-                <Input placeholder='Confirm Password' onChange={updateConfirm} mb={3}/>
+                <Input type='password' value={confirmInput} placeholder='Confirm Password' onChange={updateConfirm} mb={3}/>
                 </FormControl>
                 <Button
                     onClick={signIn}
                     variant="brand"
                     w={{base: "30%", md: "20%"}}
-                    mt={10}
+                    my={10}
                 >
                     Submit
                 </Button>
+                <Text>{message}</Text>
             </Card>
         </Box>
       </>

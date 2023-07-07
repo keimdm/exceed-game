@@ -1,5 +1,5 @@
 import { loggedIn, login } from '../utils/auth';
-import { Button, FormControl, FormLabel, Input, Box, Card, Heading } from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, Input, Box, Card, Heading, Text } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import Header from "../components/Header.jsx";
@@ -8,6 +8,7 @@ function Login() {
 
     const [emailInput, setEmailInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
+    const [message, setMessage] = useState("");
     
     const signIn = async () => {
         // use test4@test.com, password as test login
@@ -26,9 +27,11 @@ function Login() {
         });
         if (response.status === 400) {
             console.log("Try again!");
+            setMessage("Invalid username or password - please try again!");
         }
         else if (response.status === 500) {
             console.log("Server error - please try again later!");
+            setMessage("Server error - please try again later!");
         }
         else  {
             const data = await response.json();
@@ -101,16 +104,17 @@ function Login() {
                         <FormLabel>Email</FormLabel>
                         <Input placeholder='Email' onChange={updateEmail} mb={3}/>
                         <FormLabel>Password</FormLabel>
-                        <Input placeholder='Password' onChange={updatePassword} mb={3}/>
+                        <Input type='password' placeholder='Password' onChange={updatePassword} mb={3}/>
                         </FormControl>
                         <Button
                             onClick={signIn}
                             variant="brand"
                             w={{base: "30%", md: "20%"}}
-                            mt={10}
+                            my={10}
                         >
                             Log In
                         </Button>
+                        <Text>{message}</Text>
                     </Card>
                 </>
             )
