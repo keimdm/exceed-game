@@ -795,7 +795,6 @@ function LevelOneWindows() {
         setEdgeX(0);
         setLastYMove(0);
         setLastXMove(0);
-        setCommandPressed(0);
         setSelectMultipleX(0);
         setSelectMultipleY(0);
         setCounter(0);
@@ -978,7 +977,6 @@ function LevelOneWindows() {
                     <Input
                         autoFocus
                         onKeyDown={handleKeyDown}
-                        onKeyUp={handleKeyUp}
                         opacity={0}
                     />
                     {gameRunning === 1 ? (
@@ -1000,7 +998,6 @@ function LevelOneWindows() {
                             <Box
                                 tabIndex={-1}
                                 onKeyDown={handleKeyDown}
-                                onKeyUp={handleKeyUp}
                             >
                                 <Grid
                                     w="800px"
