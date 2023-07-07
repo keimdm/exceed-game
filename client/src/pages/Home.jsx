@@ -25,7 +25,7 @@ function Home() {
                         alignItems="center"
                         minH="50%"
                         maxW="90%"
-                        pb={10}
+                        py={10}
                     >
                         <Box
                             w="50%"
@@ -62,6 +62,14 @@ function Home() {
                                 display="flex"
                                 flexDirection="column"
                             >
+                                <Link to={`/instructions`}>
+                                    <Button
+                                        variant="brand"
+                                        mt={3}
+                                    >
+                                        Instructions
+                                    </Button>
+                                </Link>
                                 <Link to={`/levels`}>
                                     <Button
                                         variant="brand"

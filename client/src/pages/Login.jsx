@@ -114,7 +114,7 @@ function Login() {
                         >
                             Log In
                         </Button>
-                        <Text>{message}</Text>
+                        <Text textAlign="center">{message}</Text>
                     </Card>
                 </>
             )

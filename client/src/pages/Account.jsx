@@ -170,7 +170,7 @@ function Account() {
                                     >
                                         Submit Update
                                     </Button>
-                                    <Text>{message}</Text>
+                                    <Text textAlign="center">{message}</Text>
                                 </>
                             )}
                             

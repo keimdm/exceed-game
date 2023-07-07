@@ -117,7 +117,7 @@ function SignUp() {
                 >
                     Submit
                 </Button>
-                <Text>{message}</Text>
+                <Text textAlign="center">{message}</Text>
             </Card>
         </Box>
       </>
