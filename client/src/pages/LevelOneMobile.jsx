@@ -302,7 +302,7 @@ function LevelOneMobile() {
                             >
                                 <Grid
                                     w="300px"
-                                    h="500px"
+                                    h="400px"
                                     bgColor="brand.gray"
                                     templateColumns={"repeat(" + noCols + ", 1fr)"}
                                     templateRows={"repeat(" + noRows + ", 1fr)"}
