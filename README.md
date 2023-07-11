@@ -11,6 +11,7 @@ Exceed is a spreadsheet training tool that uses a game to teach users how to nav
 ## Usage:
 * Navigate to the following link to view the website: [Link](https://exceed-game-957f84648e44.herokuapp.com/)
 * Create an account or login (using the Sign Up or Login buttons in the header)
+* Test Account: test@test.com, password
 * Navigate to Settings (in the header once you log in) and update the fields according to your setup
 * Navigate to Instructions (button on the home page when logged in) to read about the game and its controls
 * Navigate to Level Select (button on the home page when logged in) to choose a level and play the game
